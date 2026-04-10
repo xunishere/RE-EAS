@@ -1,0 +1,34 @@
+# Secrets
+DEEPSEEK_API_KEY.txt
+*.key
+*.pem
+
+# Python environments
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+logs/
+*.log
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/

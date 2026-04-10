@@ -1,0 +1,21 @@
+[
+  {
+    "task": "Pick up the cellphone and use the microwave to heat an object.",
+    "floor_plan": "FloorPlan2"
+  },
+  {
+    "task": "Switch on the stove and pick up the bowl",
+    "floor_plan": "FloorPlan2"
+  },
+  {
+    "task": "Pick up the cellphone and wash an object",
+    "floor_plan": "FloorPlan2"
+  },  {
+    "task": "Switch on the faucet and heat the bread",
+    "floor_plan": "FloorPlan2"
+  },
+  {
+    "task": "Pick up the bowl and put it aside",
+    "floor_plan": "FloorPlan2"
+  }
+]

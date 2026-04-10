@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STL Repair Flowchart</title>
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --ink: #22313b;
+      --muted: #5d6c75;
+      --blue: #dceaf6;
+      --blue-border: #226193;
+      --green: #e4f1d8;
+      --green-border: #199a47;
+      --yellow: #f6ebbe;
+      --yellow-border: #b68c17;
+      --red: #f5d7d2;
+      --red-border: #b54b3a;
+      --gray: #efefef;
+      --gray-border: #adadad;
+      --arrow: #315f8c;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 34px 24px 40px;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 800;
+      margin: 8px 0 18px;
+    }
+
+    .top-line {
+      height: 5px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #d0d0ce 0%, #e7e6e4 100%);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 28px;
+    }
+
+    .flow {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .box, .decision {
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      border: 3px solid;
+      padding: 16px 18px;
+      text-align: center;
+      background: white;
+    }
+
+    .box h3, .decision h3 {
+      margin: 0 0 6px;
+      font-size: 22px;
+      line-height: 1.15;
+    }
+
+    .box p, .decision p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .blue { background: var(--blue); border-color: var(--blue-border); }
+    .green { background: var(--green); border-color: var(--green-border); }
+    .yellow { background: var(--yellow); border-color: var(--yellow-border); }
+    .red { background: var(--red); border-color: var(--red-border); }
+    .gray { background: var(--gray); border-color: var(--gray-border); }
+
+    .blue h3 { color: var(--blue-border); }
+    .green h3 { color: var(--green-border); }
+    .yellow h3 { color: var(--yellow-border); }
+    .red h3 { color: var(--red-border); }
+    .gray h3 { color: #666; }
+
+    .arrow {
+      color: var(--arrow);
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .decision {
+      max-width: 420px;
+      transform: rotate(45deg);
+      width: 240px;
+      height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #fff7db 0%, #f4e1a3 100%);
+      border-color: var(--yellow-border);
+      padding: 18px;
+    }
+
+    .decision > div {
+      transform: rotate(-45deg);
+      width: 92%;
+    }
+
+    .branches {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .small-arrow {
+      text-align: center;
+      font-size: 22px;
+      color: var(--arrow);
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .caption {
+      max-width: 920px;
+      margin: 20px auto 0;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.65;
+      color: #4b5963;
+    }
+
+    .caption strong { color: var(--ink); }
+
+    @media (max-width: 760px) {
+      .branches {
+        grid-template-columns: 1fr;
+      }
+
+      .decision {
+        width: 190px;
+        height: 190px;
+      }
+
+      .title {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="title">STL 约束修复流程图</div>
+    <div class="top-line"></div>
+
+    <div class="flow">
+      <div class="box blue">
+        <h3>1. 输入</h3>
+        <p>输入预测为不安全的动作，以及当前环境状态和剩余任务目标。</p>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="box blue">
+        <h3>2. STL 风险评估</h3>
+        <p>根据 STL 中定义的监测信号、阈值和当前信号到阈值的安全裕度，判断当前风险状态。</p>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="box yellow">
+        <h3>3. 生成可执行动作组</h3>
+        <p>依据当前风险状态，动态构造允许动作集合，并屏蔽会进一步接近危险阈值的动作。</p>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="box green">
+        <h3>4. 局部约束重规划</h3>
+        <p>将可执行动作组、当前状态和剩余任务一起输入规划器，生成后续局部动作序列。</p>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="decision">
+        <div>
+          <h3>找到可行后续计划吗？</h3>
+          <p>动作组为空，或动作组虽非空但局部规划仍无解，都视为失败。</p>
+        </div>
+      </div>
+
+      <div class="branches">
+        <div>
+          <div class="small-arrow">↙</div>
+          <div class="box green">
+            <h3>5A. 执行局部修复</h3>
+            <p>若找到可行局部计划，则执行该修复结果，并继续进入后续监测与执行闭环。</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="small-arrow">↘</div>
+          <div class="box red">
+            <h3>5B. 全局重规划</h3>
+            <p>若局部修复失败，则从当前状态重新规划整个剩余任务，直到任务完成或判定失败。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="box gray">
+        <h3>6. 输出</h3>
+        <p>输出修复后的动作序列；若局部修复不可行，则输出全局重规划后的新任务计划。</p>
+      </div>
+    </div>
+
+    <div class="caption">
+      该流程将修复建模为一个 <strong>STL 约束下的离散重规划问题</strong>：先依据监测信号与阈值关系生成当前
+      <strong>可执行动作组</strong>，再在该约束下规划后续动作；若局部修复无解，则升级为 <strong>全局重规划</strong>。
+    </div>
+  </div>
+</body>
+</html>

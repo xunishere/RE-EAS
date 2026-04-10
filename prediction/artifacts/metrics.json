@@ -1,0 +1,21 @@
+{
+  "model_type": "RandomForestClassifier",
+  "validation": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "avg_unsafe_probability": 0.1917,
+    "max_unsafe_probability": 0.993619,
+    "min_unsafe_probability": 1.6e-05
+  },
+  "test": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "avg_unsafe_probability": 0.186503,
+    "max_unsafe_probability": 0.992819,
+    "min_unsafe_probability": 1.6e-05
+  }
+}

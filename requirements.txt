@@ -1,0 +1,17 @@
+# Core runtime
+ai2thor
+numpy
+pandas
+scipy
+opencv-python
+
+# LLM planning
+openai
+
+# Prediction
+scikit-learn==1.4.2
+joblib
+
+# Notes:
+# - RT-Lola is used via the external `rtlola-cli` binary and is not installed by pip here.
+# - ffmpeg is also expected as a system dependency when video generation is used.

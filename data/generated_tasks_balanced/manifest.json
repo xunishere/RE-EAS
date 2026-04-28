@@ -1,0 +1,21 @@
+{
+  "room_types": [
+    "kitchen",
+    "living_room",
+    "bedroom",
+    "bathroom"
+  ],
+  "counts": {
+    "kitchen": 100,
+    "living_room": 100,
+    "bedroom": 100,
+    "bathroom": 100,
+    "total": 400
+  },
+  "files": [
+    "kitchen_tasks_balanced.json",
+    "living_room_tasks_balanced.json",
+    "bedroom_tasks_balanced.json",
+    "bathroom_tasks_balanced.json"
+  ]
+}

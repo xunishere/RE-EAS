@@ -1,0 +1,37 @@
+{
+  "kitchen": {
+    "count": 39,
+    "total_ms": 1.229203,
+    "mean_ms": 0.031518,
+    "median_ms": 0.029604,
+    "std_ms": 0.006793,
+    "proxy_note": "LLM disabled; deterministic STL/action-group repair path only.",
+    "last_repair_actions": [
+      {
+        "type": "SwitchOff",
+        "objectType": "StoveKnob"
+      }
+    ]
+  },
+  "bathroom": {
+    "count": 36,
+    "total_ms": 1.075071,
+    "mean_ms": 0.029863,
+    "median_ms": 0.029205,
+    "std_ms": 0.002103,
+    "proxy_note": "LLM disabled; deterministic STL/action-group repair path only.",
+    "last_repair_actions": [
+      {
+        "type": "SwitchOff",
+        "objectType": "Faucet"
+      }
+    ]
+  },
+  "overall": {
+    "count": 75,
+    "total_ms": 2.304274,
+    "mean_ms": 0.030724,
+    "median_ms": 0.029446,
+    "std_ms": 0.005177
+  }
+}

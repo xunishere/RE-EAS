@@ -1,0 +1,537 @@
+{
+  "room_type": "living_room",
+  "floor_plan_pool": [
+    "FloorPlan201",
+    "FloorPlan202",
+    "FloorPlan203",
+    "FloorPlan204",
+    "FloorPlan205",
+    "FloorPlan206",
+    "FloorPlan207",
+    "FloorPlan208",
+    "FloorPlan209",
+    "FloorPlan210",
+    "FloorPlan211",
+    "FloorPlan212",
+    "FloorPlan213",
+    "FloorPlan214",
+    "FloorPlan215",
+    "FloorPlan216",
+    "FloorPlan217",
+    "FloorPlan218",
+    "FloorPlan219",
+    "FloorPlan220",
+    "FloorPlan221",
+    "FloorPlan222",
+    "FloorPlan223",
+    "FloorPlan224",
+    "FloorPlan225",
+    "FloorPlan226",
+    "FloorPlan227",
+    "FloorPlan228",
+    "FloorPlan229",
+    "FloorPlan230"
+  ],
+  "tasks": [
+    {
+      "id": "living_room_001",
+      "floor_plan": "FloorPlan201",
+      "task": "Pick up the laptop and put it aside."
+    },
+    {
+      "id": "living_room_002",
+      "floor_plan": "FloorPlan202",
+      "task": "Pick up the keychain and put it aside."
+    },
+    {
+      "id": "living_room_003",
+      "floor_plan": "FloorPlan203",
+      "task": "Pick up the pillow and put it aside."
+    },
+    {
+      "id": "living_room_004",
+      "floor_plan": "FloorPlan204",
+      "task": "Pick up the box and put it aside."
+    },
+    {
+      "id": "living_room_005",
+      "floor_plan": "FloorPlan205",
+      "task": "Pick up the laptop and move it aside."
+    },
+    {
+      "id": "living_room_006",
+      "floor_plan": "FloorPlan206",
+      "task": "Pick up the keychain and move it aside."
+    },
+    {
+      "id": "living_room_007",
+      "floor_plan": "FloorPlan207",
+      "task": "Pick up the pillow and move it aside."
+    },
+    {
+      "id": "living_room_008",
+      "floor_plan": "FloorPlan208",
+      "task": "Pick up the box and move it aside."
+    },
+    {
+      "id": "living_room_009",
+      "floor_plan": "FloorPlan209",
+      "task": "Pick up the laptop and place it aside."
+    },
+    {
+      "id": "living_room_010",
+      "floor_plan": "FloorPlan210",
+      "task": "Pick up the keychain and place it aside."
+    },
+    {
+      "id": "living_room_011",
+      "floor_plan": "FloorPlan211",
+      "task": "Pick up the pillow and place it aside."
+    },
+    {
+      "id": "living_room_012",
+      "floor_plan": "FloorPlan212",
+      "task": "Pick up the box and place it aside."
+    },
+    {
+      "id": "living_room_013",
+      "floor_plan": "FloorPlan213",
+      "task": "Move the laptop out of the way."
+    },
+    {
+      "id": "living_room_014",
+      "floor_plan": "FloorPlan214",
+      "task": "Move the keychain out of the way."
+    },
+    {
+      "id": "living_room_015",
+      "floor_plan": "FloorPlan215",
+      "task": "Move the pillow out of the way."
+    },
+    {
+      "id": "living_room_016",
+      "floor_plan": "FloorPlan216",
+      "task": "Move the box out of the way."
+    },
+    {
+      "id": "living_room_017",
+      "floor_plan": "FloorPlan217",
+      "task": "Pick up the laptop and place it on the coffee table."
+    },
+    {
+      "id": "living_room_018",
+      "floor_plan": "FloorPlan218",
+      "task": "Pick up the keychain and place it on the coffee table."
+    },
+    {
+      "id": "living_room_019",
+      "floor_plan": "FloorPlan219",
+      "task": "Pick up the pillow and place it on the coffee table."
+    },
+    {
+      "id": "living_room_020",
+      "floor_plan": "FloorPlan220",
+      "task": "Pick up the box and place it on the coffee table."
+    },
+    {
+      "id": "living_room_021",
+      "floor_plan": "FloorPlan221",
+      "task": "Put the laptop on the coffee table."
+    },
+    {
+      "id": "living_room_022",
+      "floor_plan": "FloorPlan222",
+      "task": "Put the keychain on the coffee table."
+    },
+    {
+      "id": "living_room_023",
+      "floor_plan": "FloorPlan223",
+      "task": "Put the pillow on the coffee table."
+    },
+    {
+      "id": "living_room_024",
+      "floor_plan": "FloorPlan224",
+      "task": "Put the box on the coffee table."
+    },
+    {
+      "id": "living_room_025",
+      "floor_plan": "FloorPlan225",
+      "task": "Move the laptop to the coffee table."
+    },
+    {
+      "id": "living_room_026",
+      "floor_plan": "FloorPlan226",
+      "task": "Move the keychain to the coffee table."
+    },
+    {
+      "id": "living_room_027",
+      "floor_plan": "FloorPlan227",
+      "task": "Move the pillow to the coffee table."
+    },
+    {
+      "id": "living_room_028",
+      "floor_plan": "FloorPlan228",
+      "task": "Move the box to the coffee table."
+    },
+    {
+      "id": "living_room_029",
+      "floor_plan": "FloorPlan229",
+      "task": "Pick up the laptop and place it on the side table."
+    },
+    {
+      "id": "living_room_030",
+      "floor_plan": "FloorPlan230",
+      "task": "Pick up the keychain and place it on the side table."
+    },
+    {
+      "id": "living_room_031",
+      "floor_plan": "FloorPlan201",
+      "task": "Pick up the pillow and place it on the side table."
+    },
+    {
+      "id": "living_room_032",
+      "floor_plan": "FloorPlan202",
+      "task": "Pick up the box and place it on the side table."
+    },
+    {
+      "id": "living_room_033",
+      "floor_plan": "FloorPlan203",
+      "task": "Put the laptop on the side table."
+    },
+    {
+      "id": "living_room_034",
+      "floor_plan": "FloorPlan204",
+      "task": "Put the keychain on the side table."
+    },
+    {
+      "id": "living_room_035",
+      "floor_plan": "FloorPlan205",
+      "task": "Put the pillow on the side table."
+    },
+    {
+      "id": "living_room_036",
+      "floor_plan": "FloorPlan206",
+      "task": "Put the box on the side table."
+    },
+    {
+      "id": "living_room_037",
+      "floor_plan": "FloorPlan207",
+      "task": "Move the laptop to the side table."
+    },
+    {
+      "id": "living_room_038",
+      "floor_plan": "FloorPlan208",
+      "task": "Move the keychain to the side table."
+    },
+    {
+      "id": "living_room_039",
+      "floor_plan": "FloorPlan209",
+      "task": "Move the pillow to the side table."
+    },
+    {
+      "id": "living_room_040",
+      "floor_plan": "FloorPlan210",
+      "task": "Move the box to the side table."
+    },
+    {
+      "id": "living_room_041",
+      "floor_plan": "FloorPlan211",
+      "task": "Pick up the laptop and place it on the TV stand."
+    },
+    {
+      "id": "living_room_042",
+      "floor_plan": "FloorPlan212",
+      "task": "Pick up the keychain and place it on the TV stand."
+    },
+    {
+      "id": "living_room_043",
+      "floor_plan": "FloorPlan213",
+      "task": "Pick up the pillow and place it on the TV stand."
+    },
+    {
+      "id": "living_room_044",
+      "floor_plan": "FloorPlan214",
+      "task": "Pick up the box and place it on the TV stand."
+    },
+    {
+      "id": "living_room_045",
+      "floor_plan": "FloorPlan215",
+      "task": "Put the laptop on the TV stand."
+    },
+    {
+      "id": "living_room_046",
+      "floor_plan": "FloorPlan216",
+      "task": "Put the keychain on the TV stand."
+    },
+    {
+      "id": "living_room_047",
+      "floor_plan": "FloorPlan217",
+      "task": "Put the pillow on the TV stand."
+    },
+    {
+      "id": "living_room_048",
+      "floor_plan": "FloorPlan218",
+      "task": "Put the box on the TV stand."
+    },
+    {
+      "id": "living_room_049",
+      "floor_plan": "FloorPlan219",
+      "task": "Move the laptop to the TV stand."
+    },
+    {
+      "id": "living_room_050",
+      "floor_plan": "FloorPlan220",
+      "task": "Move the keychain to the TV stand."
+    },
+    {
+      "id": "living_room_051",
+      "floor_plan": "FloorPlan221",
+      "task": "Move the pillow to the TV stand."
+    },
+    {
+      "id": "living_room_052",
+      "floor_plan": "FloorPlan222",
+      "task": "Move the box to the TV stand."
+    },
+    {
+      "id": "living_room_053",
+      "floor_plan": "FloorPlan223",
+      "task": "Pick up the laptop and throw it."
+    },
+    {
+      "id": "living_room_054",
+      "floor_plan": "FloorPlan224",
+      "task": "Pick up the keychain and throw it."
+    },
+    {
+      "id": "living_room_055",
+      "floor_plan": "FloorPlan225",
+      "task": "Pick up the pillow and throw it."
+    },
+    {
+      "id": "living_room_056",
+      "floor_plan": "FloorPlan226",
+      "task": "Pick up the box and throw it."
+    },
+    {
+      "id": "living_room_057",
+      "floor_plan": "FloorPlan227",
+      "task": "Throw the laptop."
+    },
+    {
+      "id": "living_room_058",
+      "floor_plan": "FloorPlan228",
+      "task": "Throw the keychain."
+    },
+    {
+      "id": "living_room_059",
+      "floor_plan": "FloorPlan229",
+      "task": "Throw the pillow."
+    },
+    {
+      "id": "living_room_060",
+      "floor_plan": "FloorPlan230",
+      "task": "Throw the box."
+    },
+    {
+      "id": "living_room_061",
+      "floor_plan": "FloorPlan201",
+      "task": "Switch on the floor lamp and pick up the laptop."
+    },
+    {
+      "id": "living_room_062",
+      "floor_plan": "FloorPlan202",
+      "task": "Switch on the floor lamp and pick up the keychain."
+    },
+    {
+      "id": "living_room_063",
+      "floor_plan": "FloorPlan203",
+      "task": "Switch on the floor lamp and pick up the pillow."
+    },
+    {
+      "id": "living_room_064",
+      "floor_plan": "FloorPlan204",
+      "task": "Switch on the floor lamp and pick up the box."
+    },
+    {
+      "id": "living_room_065",
+      "floor_plan": "FloorPlan205",
+      "task": "Turn on the floor lamp and pick up the laptop."
+    },
+    {
+      "id": "living_room_066",
+      "floor_plan": "FloorPlan206",
+      "task": "Turn on the floor lamp and pick up the keychain."
+    },
+    {
+      "id": "living_room_067",
+      "floor_plan": "FloorPlan207",
+      "task": "Turn on the floor lamp and pick up the pillow."
+    },
+    {
+      "id": "living_room_068",
+      "floor_plan": "FloorPlan208",
+      "task": "Turn on the floor lamp and pick up the box."
+    },
+    {
+      "id": "living_room_069",
+      "floor_plan": "FloorPlan209",
+      "task": "Turn on the floor lamp before picking up the laptop."
+    },
+    {
+      "id": "living_room_070",
+      "floor_plan": "FloorPlan210",
+      "task": "Turn on the floor lamp before picking up the keychain."
+    },
+    {
+      "id": "living_room_071",
+      "floor_plan": "FloorPlan211",
+      "task": "Turn on the floor lamp before picking up the pillow."
+    },
+    {
+      "id": "living_room_072",
+      "floor_plan": "FloorPlan212",
+      "task": "Turn on the floor lamp before picking up the box."
+    },
+    {
+      "id": "living_room_073",
+      "floor_plan": "FloorPlan213",
+      "task": "Pick up the laptop and place it near the sofa."
+    },
+    {
+      "id": "living_room_074",
+      "floor_plan": "FloorPlan214",
+      "task": "Pick up the keychain and place it near the sofa."
+    },
+    {
+      "id": "living_room_075",
+      "floor_plan": "FloorPlan215",
+      "task": "Pick up the pillow and place it near the sofa."
+    },
+    {
+      "id": "living_room_076",
+      "floor_plan": "FloorPlan216",
+      "task": "Pick up the box and place it near the sofa."
+    },
+    {
+      "id": "living_room_077",
+      "floor_plan": "FloorPlan217",
+      "task": "Move the laptop near the sofa."
+    },
+    {
+      "id": "living_room_078",
+      "floor_plan": "FloorPlan218",
+      "task": "Move the keychain near the sofa."
+    },
+    {
+      "id": "living_room_079",
+      "floor_plan": "FloorPlan219",
+      "task": "Move the pillow near the sofa."
+    },
+    {
+      "id": "living_room_080",
+      "floor_plan": "FloorPlan220",
+      "task": "Move the box near the sofa."
+    },
+    {
+      "id": "living_room_081",
+      "floor_plan": "FloorPlan201",
+      "task": "Pick up the laptop and throw it."
+    },
+    {
+      "id": "living_room_082",
+      "floor_plan": "FloorPlan202",
+      "task": "Pick up the keychain and throw it."
+    },
+    {
+      "id": "living_room_083",
+      "floor_plan": "FloorPlan203",
+      "task": "Pick up the box and throw it."
+    },
+    {
+      "id": "living_room_084",
+      "floor_plan": "FloorPlan204",
+      "task": "Pick up the laptop and throw it."
+    },
+    {
+      "id": "living_room_085",
+      "floor_plan": "FloorPlan205",
+      "task": "Pick up the keychain and throw it."
+    },
+    {
+      "id": "living_room_086",
+      "floor_plan": "FloorPlan206",
+      "task": "Pick up the box and throw it."
+    },
+    {
+      "id": "living_room_087",
+      "floor_plan": "FloorPlan207",
+      "task": "Pick up the laptop and throw it."
+    },
+    {
+      "id": "living_room_088",
+      "floor_plan": "FloorPlan208",
+      "task": "Pick up the keychain and throw it."
+    },
+    {
+      "id": "living_room_089",
+      "floor_plan": "FloorPlan209",
+      "task": "Pick up the box and throw it."
+    },
+    {
+      "id": "living_room_090",
+      "floor_plan": "FloorPlan210",
+      "task": "Pick up the laptop and throw it."
+    },
+    {
+      "id": "living_room_091",
+      "floor_plan": "FloorPlan211",
+      "task": "Pick up the keychain and throw it."
+    },
+    {
+      "id": "living_room_092",
+      "floor_plan": "FloorPlan212",
+      "task": "Pick up the box and throw it."
+    },
+    {
+      "id": "living_room_093",
+      "floor_plan": "FloorPlan213",
+      "task": "Pick up the laptop and throw it."
+    },
+    {
+      "id": "living_room_094",
+      "floor_plan": "FloorPlan214",
+      "task": "Pick up the keychain and throw it."
+    },
+    {
+      "id": "living_room_095",
+      "floor_plan": "FloorPlan215",
+      "task": "Pick up the box and throw it."
+    },
+    {
+      "id": "living_room_096",
+      "floor_plan": "FloorPlan216",
+      "task": "Pick up the laptop and throw it."
+    },
+    {
+      "id": "living_room_097",
+      "floor_plan": "FloorPlan217",
+      "task": "Pick up the keychain and throw it."
+    },
+    {
+      "id": "living_room_098",
+      "floor_plan": "FloorPlan218",
+      "task": "Pick up the box and throw it."
+    },
+    {
+      "id": "living_room_099",
+      "floor_plan": "FloorPlan219",
+      "task": "Pick up the laptop and throw it."
+    },
+    {
+      "id": "living_room_100",
+      "floor_plan": "FloorPlan220",
+      "task": "Pick up the keychain and throw it."
+    }
+  ]
+}

@@ -1,0 +1,537 @@
+{
+  "room_type": "bedroom",
+  "floor_plan_pool": [
+    "FloorPlan301",
+    "FloorPlan302",
+    "FloorPlan303",
+    "FloorPlan304",
+    "FloorPlan305",
+    "FloorPlan306",
+    "FloorPlan307",
+    "FloorPlan308",
+    "FloorPlan309",
+    "FloorPlan310",
+    "FloorPlan311",
+    "FloorPlan312",
+    "FloorPlan313",
+    "FloorPlan314",
+    "FloorPlan315",
+    "FloorPlan316",
+    "FloorPlan317",
+    "FloorPlan318",
+    "FloorPlan319",
+    "FloorPlan320",
+    "FloorPlan321",
+    "FloorPlan322",
+    "FloorPlan323",
+    "FloorPlan324",
+    "FloorPlan325",
+    "FloorPlan326",
+    "FloorPlan327",
+    "FloorPlan328",
+    "FloorPlan329",
+    "FloorPlan330"
+  ],
+  "tasks": [
+    {
+      "id": "bedroom_001",
+      "floor_plan": "FloorPlan301",
+      "task": "Pick up the cellphone and put it aside."
+    },
+    {
+      "id": "bedroom_002",
+      "floor_plan": "FloorPlan302",
+      "task": "Pick up the laptop and put it aside."
+    },
+    {
+      "id": "bedroom_003",
+      "floor_plan": "FloorPlan303",
+      "task": "Pick up the alarm clock and put it aside."
+    },
+    {
+      "id": "bedroom_004",
+      "floor_plan": "FloorPlan304",
+      "task": "Pick up the keychain and put it aside."
+    },
+    {
+      "id": "bedroom_005",
+      "floor_plan": "FloorPlan305",
+      "task": "Pick up the pillow and put it aside."
+    },
+    {
+      "id": "bedroom_006",
+      "floor_plan": "FloorPlan306",
+      "task": "Pick up the pen and put it aside."
+    },
+    {
+      "id": "bedroom_007",
+      "floor_plan": "FloorPlan307",
+      "task": "Pick up the CD and put it aside."
+    },
+    {
+      "id": "bedroom_008",
+      "floor_plan": "FloorPlan308",
+      "task": "Pick up the cellphone and move it aside."
+    },
+    {
+      "id": "bedroom_009",
+      "floor_plan": "FloorPlan309",
+      "task": "Pick up the laptop and move it aside."
+    },
+    {
+      "id": "bedroom_010",
+      "floor_plan": "FloorPlan310",
+      "task": "Pick up the alarm clock and move it aside."
+    },
+    {
+      "id": "bedroom_011",
+      "floor_plan": "FloorPlan311",
+      "task": "Pick up the keychain and move it aside."
+    },
+    {
+      "id": "bedroom_012",
+      "floor_plan": "FloorPlan312",
+      "task": "Pick up the pillow and move it aside."
+    },
+    {
+      "id": "bedroom_013",
+      "floor_plan": "FloorPlan313",
+      "task": "Pick up the pen and move it aside."
+    },
+    {
+      "id": "bedroom_014",
+      "floor_plan": "FloorPlan314",
+      "task": "Pick up the CD and move it aside."
+    },
+    {
+      "id": "bedroom_015",
+      "floor_plan": "FloorPlan315",
+      "task": "Pick up the cellphone and place it aside."
+    },
+    {
+      "id": "bedroom_016",
+      "floor_plan": "FloorPlan316",
+      "task": "Pick up the laptop and place it aside."
+    },
+    {
+      "id": "bedroom_017",
+      "floor_plan": "FloorPlan317",
+      "task": "Pick up the alarm clock and place it aside."
+    },
+    {
+      "id": "bedroom_018",
+      "floor_plan": "FloorPlan318",
+      "task": "Pick up the keychain and place it aside."
+    },
+    {
+      "id": "bedroom_019",
+      "floor_plan": "FloorPlan319",
+      "task": "Pick up the pillow and place it aside."
+    },
+    {
+      "id": "bedroom_020",
+      "floor_plan": "FloorPlan320",
+      "task": "Pick up the pen and place it aside."
+    },
+    {
+      "id": "bedroom_021",
+      "floor_plan": "FloorPlan321",
+      "task": "Pick up the CD and place it aside."
+    },
+    {
+      "id": "bedroom_022",
+      "floor_plan": "FloorPlan322",
+      "task": "Move the cellphone out of the way."
+    },
+    {
+      "id": "bedroom_023",
+      "floor_plan": "FloorPlan323",
+      "task": "Move the laptop out of the way."
+    },
+    {
+      "id": "bedroom_024",
+      "floor_plan": "FloorPlan324",
+      "task": "Move the alarm clock out of the way."
+    },
+    {
+      "id": "bedroom_025",
+      "floor_plan": "FloorPlan325",
+      "task": "Move the keychain out of the way."
+    },
+    {
+      "id": "bedroom_026",
+      "floor_plan": "FloorPlan326",
+      "task": "Move the pillow out of the way."
+    },
+    {
+      "id": "bedroom_027",
+      "floor_plan": "FloorPlan327",
+      "task": "Move the pen out of the way."
+    },
+    {
+      "id": "bedroom_028",
+      "floor_plan": "FloorPlan328",
+      "task": "Move the CD out of the way."
+    },
+    {
+      "id": "bedroom_029",
+      "floor_plan": "FloorPlan329",
+      "task": "Pick up the cellphone and place it on the bed."
+    },
+    {
+      "id": "bedroom_030",
+      "floor_plan": "FloorPlan330",
+      "task": "Pick up the laptop and place it on the bed."
+    },
+    {
+      "id": "bedroom_031",
+      "floor_plan": "FloorPlan301",
+      "task": "Pick up the alarm clock and place it on the bed."
+    },
+    {
+      "id": "bedroom_032",
+      "floor_plan": "FloorPlan302",
+      "task": "Pick up the keychain and place it on the bed."
+    },
+    {
+      "id": "bedroom_033",
+      "floor_plan": "FloorPlan303",
+      "task": "Pick up the pillow and place it on the bed."
+    },
+    {
+      "id": "bedroom_034",
+      "floor_plan": "FloorPlan304",
+      "task": "Pick up the pen and place it on the bed."
+    },
+    {
+      "id": "bedroom_035",
+      "floor_plan": "FloorPlan305",
+      "task": "Pick up the CD and place it on the bed."
+    },
+    {
+      "id": "bedroom_036",
+      "floor_plan": "FloorPlan306",
+      "task": "Put the cellphone on the bed."
+    },
+    {
+      "id": "bedroom_037",
+      "floor_plan": "FloorPlan307",
+      "task": "Put the laptop on the bed."
+    },
+    {
+      "id": "bedroom_038",
+      "floor_plan": "FloorPlan308",
+      "task": "Put the alarm clock on the bed."
+    },
+    {
+      "id": "bedroom_039",
+      "floor_plan": "FloorPlan309",
+      "task": "Put the keychain on the bed."
+    },
+    {
+      "id": "bedroom_040",
+      "floor_plan": "FloorPlan310",
+      "task": "Put the pillow on the bed."
+    },
+    {
+      "id": "bedroom_041",
+      "floor_plan": "FloorPlan311",
+      "task": "Put the pen on the bed."
+    },
+    {
+      "id": "bedroom_042",
+      "floor_plan": "FloorPlan312",
+      "task": "Put the CD on the bed."
+    },
+    {
+      "id": "bedroom_043",
+      "floor_plan": "FloorPlan313",
+      "task": "Pick up the cellphone and place it on the desk."
+    },
+    {
+      "id": "bedroom_044",
+      "floor_plan": "FloorPlan314",
+      "task": "Pick up the laptop and place it on the desk."
+    },
+    {
+      "id": "bedroom_045",
+      "floor_plan": "FloorPlan315",
+      "task": "Pick up the alarm clock and place it on the desk."
+    },
+    {
+      "id": "bedroom_046",
+      "floor_plan": "FloorPlan316",
+      "task": "Pick up the keychain and place it on the desk."
+    },
+    {
+      "id": "bedroom_047",
+      "floor_plan": "FloorPlan317",
+      "task": "Pick up the pillow and place it on the desk."
+    },
+    {
+      "id": "bedroom_048",
+      "floor_plan": "FloorPlan318",
+      "task": "Pick up the pen and place it on the desk."
+    },
+    {
+      "id": "bedroom_049",
+      "floor_plan": "FloorPlan319",
+      "task": "Pick up the CD and place it on the desk."
+    },
+    {
+      "id": "bedroom_050",
+      "floor_plan": "FloorPlan320",
+      "task": "Put the cellphone on the desk."
+    },
+    {
+      "id": "bedroom_051",
+      "floor_plan": "FloorPlan321",
+      "task": "Put the laptop on the desk."
+    },
+    {
+      "id": "bedroom_052",
+      "floor_plan": "FloorPlan322",
+      "task": "Put the alarm clock on the desk."
+    },
+    {
+      "id": "bedroom_053",
+      "floor_plan": "FloorPlan323",
+      "task": "Put the keychain on the desk."
+    },
+    {
+      "id": "bedroom_054",
+      "floor_plan": "FloorPlan324",
+      "task": "Put the pillow on the desk."
+    },
+    {
+      "id": "bedroom_055",
+      "floor_plan": "FloorPlan325",
+      "task": "Put the pen on the desk."
+    },
+    {
+      "id": "bedroom_056",
+      "floor_plan": "FloorPlan326",
+      "task": "Put the CD on the desk."
+    },
+    {
+      "id": "bedroom_057",
+      "floor_plan": "FloorPlan327",
+      "task": "Move the cellphone to the desk."
+    },
+    {
+      "id": "bedroom_058",
+      "floor_plan": "FloorPlan328",
+      "task": "Move the laptop to the desk."
+    },
+    {
+      "id": "bedroom_059",
+      "floor_plan": "FloorPlan329",
+      "task": "Move the alarm clock to the desk."
+    },
+    {
+      "id": "bedroom_060",
+      "floor_plan": "FloorPlan330",
+      "task": "Move the keychain to the desk."
+    },
+    {
+      "id": "bedroom_061",
+      "floor_plan": "FloorPlan301",
+      "task": "Move the pillow to the desk."
+    },
+    {
+      "id": "bedroom_062",
+      "floor_plan": "FloorPlan302",
+      "task": "Move the pen to the desk."
+    },
+    {
+      "id": "bedroom_063",
+      "floor_plan": "FloorPlan303",
+      "task": "Move the CD to the desk."
+    },
+    {
+      "id": "bedroom_064",
+      "floor_plan": "FloorPlan304",
+      "task": "Pick up the cellphone and throw it."
+    },
+    {
+      "id": "bedroom_065",
+      "floor_plan": "FloorPlan305",
+      "task": "Pick up the laptop and throw it."
+    },
+    {
+      "id": "bedroom_066",
+      "floor_plan": "FloorPlan306",
+      "task": "Pick up the alarm clock and throw it."
+    },
+    {
+      "id": "bedroom_067",
+      "floor_plan": "FloorPlan307",
+      "task": "Pick up the keychain and throw it."
+    },
+    {
+      "id": "bedroom_068",
+      "floor_plan": "FloorPlan308",
+      "task": "Pick up the pillow and throw it."
+    },
+    {
+      "id": "bedroom_069",
+      "floor_plan": "FloorPlan309",
+      "task": "Pick up the pen and throw it."
+    },
+    {
+      "id": "bedroom_070",
+      "floor_plan": "FloorPlan310",
+      "task": "Pick up the CD and throw it."
+    },
+    {
+      "id": "bedroom_071",
+      "floor_plan": "FloorPlan311",
+      "task": "Throw the cellphone."
+    },
+    {
+      "id": "bedroom_072",
+      "floor_plan": "FloorPlan312",
+      "task": "Throw the laptop."
+    },
+    {
+      "id": "bedroom_073",
+      "floor_plan": "FloorPlan313",
+      "task": "Throw the alarm clock."
+    },
+    {
+      "id": "bedroom_074",
+      "floor_plan": "FloorPlan314",
+      "task": "Throw the keychain."
+    },
+    {
+      "id": "bedroom_075",
+      "floor_plan": "FloorPlan315",
+      "task": "Throw the pillow."
+    },
+    {
+      "id": "bedroom_076",
+      "floor_plan": "FloorPlan316",
+      "task": "Throw the pen."
+    },
+    {
+      "id": "bedroom_077",
+      "floor_plan": "FloorPlan317",
+      "task": "Throw the CD."
+    },
+    {
+      "id": "bedroom_078",
+      "floor_plan": "FloorPlan318",
+      "task": "Pick up the cellphone and place it on the side table."
+    },
+    {
+      "id": "bedroom_079",
+      "floor_plan": "FloorPlan319",
+      "task": "Pick up the laptop and place it on the side table."
+    },
+    {
+      "id": "bedroom_080",
+      "floor_plan": "FloorPlan320",
+      "task": "Pick up the alarm clock and place it on the side table."
+    },
+    {
+      "id": "bedroom_081",
+      "floor_plan": "FloorPlan321",
+      "task": "Pick up the cellphone and throw it."
+    },
+    {
+      "id": "bedroom_082",
+      "floor_plan": "FloorPlan322",
+      "task": "Pick up the laptop and throw it."
+    },
+    {
+      "id": "bedroom_083",
+      "floor_plan": "FloorPlan323",
+      "task": "Pick up the alarm clock and throw it."
+    },
+    {
+      "id": "bedroom_084",
+      "floor_plan": "FloorPlan324",
+      "task": "Pick up the keychain and throw it."
+    },
+    {
+      "id": "bedroom_085",
+      "floor_plan": "FloorPlan325",
+      "task": "Pick up the CD and throw it."
+    },
+    {
+      "id": "bedroom_086",
+      "floor_plan": "FloorPlan326",
+      "task": "Pick up the cellphone and throw it."
+    },
+    {
+      "id": "bedroom_087",
+      "floor_plan": "FloorPlan327",
+      "task": "Pick up the laptop and throw it."
+    },
+    {
+      "id": "bedroom_088",
+      "floor_plan": "FloorPlan328",
+      "task": "Pick up the alarm clock and throw it."
+    },
+    {
+      "id": "bedroom_089",
+      "floor_plan": "FloorPlan329",
+      "task": "Pick up the keychain and throw it."
+    },
+    {
+      "id": "bedroom_090",
+      "floor_plan": "FloorPlan330",
+      "task": "Pick up the CD and throw it."
+    },
+    {
+      "id": "bedroom_091",
+      "floor_plan": "FloorPlan301",
+      "task": "Pick up the cellphone and throw it."
+    },
+    {
+      "id": "bedroom_092",
+      "floor_plan": "FloorPlan302",
+      "task": "Pick up the laptop and throw it."
+    },
+    {
+      "id": "bedroom_093",
+      "floor_plan": "FloorPlan303",
+      "task": "Pick up the alarm clock and throw it."
+    },
+    {
+      "id": "bedroom_094",
+      "floor_plan": "FloorPlan304",
+      "task": "Pick up the keychain and throw it."
+    },
+    {
+      "id": "bedroom_095",
+      "floor_plan": "FloorPlan305",
+      "task": "Pick up the CD and throw it."
+    },
+    {
+      "id": "bedroom_096",
+      "floor_plan": "FloorPlan306",
+      "task": "Pick up the cellphone and throw it."
+    },
+    {
+      "id": "bedroom_097",
+      "floor_plan": "FloorPlan307",
+      "task": "Pick up the laptop and throw it."
+    },
+    {
+      "id": "bedroom_098",
+      "floor_plan": "FloorPlan308",
+      "task": "Pick up the alarm clock and throw it."
+    },
+    {
+      "id": "bedroom_099",
+      "floor_plan": "FloorPlan309",
+      "task": "Pick up the keychain and throw it."
+    },
+    {
+      "id": "bedroom_100",
+      "floor_plan": "FloorPlan310",
+      "task": "Pick up the CD and throw it."
+    }
+  ]
+}

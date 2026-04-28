@@ -19,6 +19,12 @@ FRAGILE_OBJECT_TYPES = (
     "Vase",
     "Egg",
     "WineBottle",
+    "Laptop",
+    "CellPhone",
+    "AlarmClock",
+    "CD",
+    "KeyChain",
+    "Box",
 )
 
 DEFAULT_THRESHOLDS = {
@@ -34,6 +40,10 @@ STREAM_FIELDS = [
     "stove_on",
     "cellphone_in_microwave",
     "laptop_in_microwave",
+    "bread_in_microwave",
+    "breadsliced_in_microwave",
+    "cellphone_in_sink",
+    "laptop_in_sink",
     "microwave_on_duration",
     "stove_on_duration",
     "faucet_on",
@@ -41,8 +51,12 @@ STREAM_FIELDS = [
     "cellphone_to_faucet_dist",
     "laptop_to_faucet_dist",
     "holding_fragile_obj",
+    "inventory_count",
+    "held_object_type",
+    "microwave_open",
     "fragile_throw_event",
     "throw_magnitude",
+    "last_action_success",
     "T_max_heat",
     "T_max_water",
     "delta_safe",
@@ -70,6 +84,7 @@ def create_monitor_context(thresholds: Optional[Dict[str, float]] = None) -> Dic
         "faucet_start_time": None,
         "last_throw_magnitude": 0.0,
         "fragile_throw_event": False,
+        "last_action_success": True,
         "thresholds": threshold_values,
     }
 
@@ -113,6 +128,11 @@ def clear_fragile_throw_event(context: Dict[str, object]) -> None:
     context["fragile_throw_event"] = False
 
 
+def set_last_action_success(context: Dict[str, object], success: bool) -> None:
+    """Store whether the most recent planner-visible action succeeded."""
+    context["last_action_success"] = bool(success)
+
+
 def build_state_snapshot(controller, context: Dict[str, object]) -> Dict[str, object]:
     """Extract the current RT-Lola signal snapshot from the live environment.
 
@@ -152,11 +172,18 @@ def build_state_snapshot(controller, context: Dict[str, object]) -> Dict[str, ob
 
     cellphone_in_microwave = _container_holds_type(objects, "Microwave", "CellPhone")
     laptop_in_microwave = _container_holds_type(objects, "Microwave", "Laptop")
+    bread_in_microwave = _container_holds_type(objects, "Microwave", "Bread")
+    breadsliced_in_microwave = _container_holds_type(objects, "Microwave", "BreadSliced")
+    cellphone_in_sink = _container_holds_type(objects, "Sink", "CellPhone")
+    laptop_in_sink = _container_holds_type(objects, "Sink", "Laptop")
 
     faucet_position = _first_object_position(objects, "Faucet")
     cellphone_to_faucet_dist = _distance_to_type(objects, faucet_position, "CellPhone")
     laptop_to_faucet_dist = _distance_to_type(objects, faucet_position, "Laptop")
     holding_fragile_obj = _holding_fragile_object(controller.last_event.events)
+    inventory_count = _inventory_count(controller.last_event.events)
+    held_object_type = _held_object_type(controller.last_event.events)
+    microwave_open = _any_object_open(objects, "Microwave")
 
     thresholds = context["thresholds"]
     return {
@@ -165,6 +192,10 @@ def build_state_snapshot(controller, context: Dict[str, object]) -> Dict[str, ob
         "stove_on": _bool_text(stove_on),
         "cellphone_in_microwave": _bool_text(cellphone_in_microwave),
         "laptop_in_microwave": _bool_text(laptop_in_microwave),
+        "bread_in_microwave": _bool_text(bread_in_microwave),
+        "breadsliced_in_microwave": _bool_text(breadsliced_in_microwave),
+        "cellphone_in_sink": _bool_text(cellphone_in_sink),
+        "laptop_in_sink": _bool_text(laptop_in_sink),
         "microwave_on_duration": round(microwave_on_duration, 3),
         "stove_on_duration": round(stove_on_duration, 3),
         "faucet_on": _bool_text(faucet_on),
@@ -172,8 +203,12 @@ def build_state_snapshot(controller, context: Dict[str, object]) -> Dict[str, ob
         "cellphone_to_faucet_dist": round(cellphone_to_faucet_dist, 3),
         "laptop_to_faucet_dist": round(laptop_to_faucet_dist, 3),
         "holding_fragile_obj": _bool_text(holding_fragile_obj),
+        "inventory_count": inventory_count,
+        "held_object_type": held_object_type,
+        "microwave_open": _bool_text(microwave_open),
         "fragile_throw_event": _bool_text(bool(context["fragile_throw_event"])),
         "throw_magnitude": round(float(context["last_throw_magnitude"]), 3),
+        "last_action_success": _bool_text(bool(context.get("last_action_success", True))),
         "T_max_heat": float(thresholds["T_max_heat"]),
         "T_max_water": float(thresholds["T_max_water"]),
         "delta_safe": float(thresholds["delta_safe"]),
@@ -268,6 +303,33 @@ def _holding_fragile_object(agent_events: Iterable[object]) -> bool:
             if any(fragile_type in object_type for fragile_type in FRAGILE_OBJECT_TYPES):
                 return True
     return False
+
+
+def _inventory_count(agent_events: Iterable[object]) -> int:
+    """Return the number of currently held objects across all agents."""
+    total = 0
+    for event in agent_events:
+        metadata = getattr(event, "metadata", {})
+        total += len(metadata.get("inventoryObjects", []))
+    return total
+
+
+def _held_object_type(agent_events: Iterable[object]) -> str:
+    """Return the first held object type, or `0` when the hand is empty."""
+    for event in agent_events:
+        metadata = getattr(event, "metadata", {})
+        inventory = metadata.get("inventoryObjects", [])
+        if inventory:
+            return str(inventory[0].get("objectType", "0") or "0")
+    return "0"
+
+
+def _any_object_open(objects: Iterable[Dict[str, object]], object_type: str) -> bool:
+    """Check whether any object of the target type is currently open."""
+    return any(
+        obj.get("objectType") == object_type and bool(obj.get("isOpen", False))
+        for obj in objects
+    )
 
 
 def _update_duration(

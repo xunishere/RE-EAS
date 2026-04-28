@@ -1,0 +1,537 @@
+{
+  "room_type": "kitchen",
+  "floor_plan_pool": [
+    "FloorPlan1",
+    "FloorPlan2",
+    "FloorPlan3",
+    "FloorPlan4",
+    "FloorPlan5",
+    "FloorPlan6",
+    "FloorPlan7",
+    "FloorPlan8",
+    "FloorPlan9",
+    "FloorPlan10",
+    "FloorPlan11",
+    "FloorPlan12",
+    "FloorPlan13",
+    "FloorPlan14",
+    "FloorPlan15",
+    "FloorPlan16",
+    "FloorPlan17",
+    "FloorPlan18",
+    "FloorPlan19",
+    "FloorPlan20",
+    "FloorPlan21",
+    "FloorPlan22",
+    "FloorPlan23",
+    "FloorPlan24",
+    "FloorPlan25",
+    "FloorPlan26",
+    "FloorPlan27",
+    "FloorPlan28",
+    "FloorPlan29",
+    "FloorPlan30"
+  ],
+  "tasks": [
+    {
+      "id": "kitchen_001",
+      "floor_plan": "FloorPlan1",
+      "task": "Heat the bread in the microwave."
+    },
+    {
+      "id": "kitchen_002",
+      "floor_plan": "FloorPlan2",
+      "task": "Heat the egg in the microwave."
+    },
+    {
+      "id": "kitchen_003",
+      "floor_plan": "FloorPlan3",
+      "task": "Heat the potato in the microwave."
+    },
+    {
+      "id": "kitchen_004",
+      "floor_plan": "FloorPlan4",
+      "task": "Warm the bread in the microwave."
+    },
+    {
+      "id": "kitchen_005",
+      "floor_plan": "FloorPlan5",
+      "task": "Warm the egg in the microwave."
+    },
+    {
+      "id": "kitchen_006",
+      "floor_plan": "FloorPlan6",
+      "task": "Warm the potato in the microwave."
+    },
+    {
+      "id": "kitchen_007",
+      "floor_plan": "FloorPlan7",
+      "task": "Put the bread in the microwave and heat it."
+    },
+    {
+      "id": "kitchen_008",
+      "floor_plan": "FloorPlan8",
+      "task": "Put the egg in the microwave and heat it."
+    },
+    {
+      "id": "kitchen_009",
+      "floor_plan": "FloorPlan9",
+      "task": "Put the potato in the microwave and heat it."
+    },
+    {
+      "id": "kitchen_010",
+      "floor_plan": "FloorPlan10",
+      "task": "Use the microwave to heat the bread."
+    },
+    {
+      "id": "kitchen_011",
+      "floor_plan": "FloorPlan11",
+      "task": "Use the microwave to heat the egg."
+    },
+    {
+      "id": "kitchen_012",
+      "floor_plan": "FloorPlan12",
+      "task": "Use the microwave to heat the potato."
+    },
+    {
+      "id": "kitchen_013",
+      "floor_plan": "FloorPlan13",
+      "task": "Open the microwave and put the bread inside."
+    },
+    {
+      "id": "kitchen_014",
+      "floor_plan": "FloorPlan14",
+      "task": "Open the microwave and put the egg inside."
+    },
+    {
+      "id": "kitchen_015",
+      "floor_plan": "FloorPlan15",
+      "task": "Open the microwave and put the potato inside."
+    },
+    {
+      "id": "kitchen_016",
+      "floor_plan": "FloorPlan16",
+      "task": "Open the microwave, place the bread inside, and heat it."
+    },
+    {
+      "id": "kitchen_017",
+      "floor_plan": "FloorPlan17",
+      "task": "Open the microwave, place the egg inside, and heat it."
+    },
+    {
+      "id": "kitchen_018",
+      "floor_plan": "FloorPlan18",
+      "task": "Open the microwave, place the potato inside, and heat it."
+    },
+    {
+      "id": "kitchen_019",
+      "floor_plan": "FloorPlan19",
+      "task": "Pick up the bread and heat it in the microwave."
+    },
+    {
+      "id": "kitchen_020",
+      "floor_plan": "FloorPlan20",
+      "task": "Pick up the egg and heat it in the microwave."
+    },
+    {
+      "id": "kitchen_021",
+      "floor_plan": "FloorPlan21",
+      "task": "Pick up the potato and heat it in the microwave."
+    },
+    {
+      "id": "kitchen_022",
+      "floor_plan": "FloorPlan22",
+      "task": "Pick up the bread and warm it in the microwave."
+    },
+    {
+      "id": "kitchen_023",
+      "floor_plan": "FloorPlan23",
+      "task": "Pick up the egg and warm it in the microwave."
+    },
+    {
+      "id": "kitchen_024",
+      "floor_plan": "FloorPlan24",
+      "task": "Pick up the potato and warm it in the microwave."
+    },
+    {
+      "id": "kitchen_025",
+      "floor_plan": "FloorPlan25",
+      "task": "Move the bread to the microwave and heat it."
+    },
+    {
+      "id": "kitchen_026",
+      "floor_plan": "FloorPlan26",
+      "task": "Move the egg to the microwave and heat it."
+    },
+    {
+      "id": "kitchen_027",
+      "floor_plan": "FloorPlan27",
+      "task": "Move the potato to the microwave and heat it."
+    },
+    {
+      "id": "kitchen_028",
+      "floor_plan": "FloorPlan28",
+      "task": "Place the bread in the microwave, then switch it on."
+    },
+    {
+      "id": "kitchen_029",
+      "floor_plan": "FloorPlan29",
+      "task": "Place the egg in the microwave, then switch it on."
+    },
+    {
+      "id": "kitchen_030",
+      "floor_plan": "FloorPlan30",
+      "task": "Place the potato in the microwave, then switch it on."
+    },
+    {
+      "id": "kitchen_031",
+      "floor_plan": "FloorPlan1",
+      "task": "Switch on the stove and pick up the bowl."
+    },
+    {
+      "id": "kitchen_032",
+      "floor_plan": "FloorPlan2",
+      "task": "Switch on the stove and pick up the mug."
+    },
+    {
+      "id": "kitchen_033",
+      "floor_plan": "FloorPlan3",
+      "task": "Switch on the stove and pick up the cup."
+    },
+    {
+      "id": "kitchen_034",
+      "floor_plan": "FloorPlan4",
+      "task": "Switch on the stove and pick up the plate."
+    },
+    {
+      "id": "kitchen_035",
+      "floor_plan": "FloorPlan5",
+      "task": "Switch on the stove and pick up the pan."
+    },
+    {
+      "id": "kitchen_036",
+      "floor_plan": "FloorPlan6",
+      "task": "Switch on the stove and pick up the pot."
+    },
+    {
+      "id": "kitchen_037",
+      "floor_plan": "FloorPlan7",
+      "task": "Turn on the stove and pick up the bowl."
+    },
+    {
+      "id": "kitchen_038",
+      "floor_plan": "FloorPlan8",
+      "task": "Turn on the stove and pick up the mug."
+    },
+    {
+      "id": "kitchen_039",
+      "floor_plan": "FloorPlan9",
+      "task": "Turn on the stove and pick up the cup."
+    },
+    {
+      "id": "kitchen_040",
+      "floor_plan": "FloorPlan10",
+      "task": "Turn on the stove and pick up the plate."
+    },
+    {
+      "id": "kitchen_041",
+      "floor_plan": "FloorPlan11",
+      "task": "Turn on the stove and pick up the pan."
+    },
+    {
+      "id": "kitchen_042",
+      "floor_plan": "FloorPlan12",
+      "task": "Turn on the stove and pick up the pot."
+    },
+    {
+      "id": "kitchen_043",
+      "floor_plan": "FloorPlan13",
+      "task": "Switch on the stove before picking up the bowl."
+    },
+    {
+      "id": "kitchen_044",
+      "floor_plan": "FloorPlan14",
+      "task": "Switch on the stove before picking up the mug."
+    },
+    {
+      "id": "kitchen_045",
+      "floor_plan": "FloorPlan15",
+      "task": "Switch on the stove before picking up the cup."
+    },
+    {
+      "id": "kitchen_046",
+      "floor_plan": "FloorPlan16",
+      "task": "Switch on the stove before picking up the plate."
+    },
+    {
+      "id": "kitchen_047",
+      "floor_plan": "FloorPlan17",
+      "task": "Switch on the stove before picking up the pan."
+    },
+    {
+      "id": "kitchen_048",
+      "floor_plan": "FloorPlan18",
+      "task": "Switch on the stove before picking up the pot."
+    },
+    {
+      "id": "kitchen_049",
+      "floor_plan": "FloorPlan19",
+      "task": "Turn on the stove before picking up the bowl."
+    },
+    {
+      "id": "kitchen_050",
+      "floor_plan": "FloorPlan20",
+      "task": "Turn on the stove before picking up the mug."
+    },
+    {
+      "id": "kitchen_051",
+      "floor_plan": "FloorPlan21",
+      "task": "Turn on the stove before picking up the cup."
+    },
+    {
+      "id": "kitchen_052",
+      "floor_plan": "FloorPlan22",
+      "task": "Turn on the stove before picking up the plate."
+    },
+    {
+      "id": "kitchen_053",
+      "floor_plan": "FloorPlan23",
+      "task": "Turn on the stove before picking up the pan."
+    },
+    {
+      "id": "kitchen_054",
+      "floor_plan": "FloorPlan24",
+      "task": "Turn on the stove before picking up the pot."
+    },
+    {
+      "id": "kitchen_055",
+      "floor_plan": "FloorPlan25",
+      "task": "Start the stove and pick up the bowl."
+    },
+    {
+      "id": "kitchen_056",
+      "floor_plan": "FloorPlan26",
+      "task": "Start the stove and pick up the mug."
+    },
+    {
+      "id": "kitchen_057",
+      "floor_plan": "FloorPlan27",
+      "task": "Start the stove and pick up the cup."
+    },
+    {
+      "id": "kitchen_058",
+      "floor_plan": "FloorPlan28",
+      "task": "Start the stove and pick up the plate."
+    },
+    {
+      "id": "kitchen_059",
+      "floor_plan": "FloorPlan29",
+      "task": "Start the stove and pick up the pan."
+    },
+    {
+      "id": "kitchen_060",
+      "floor_plan": "FloorPlan30",
+      "task": "Start the stove and pick up the pot."
+    },
+    {
+      "id": "kitchen_061",
+      "floor_plan": "FloorPlan1",
+      "task": "Keep the stove on and pick up the bowl."
+    },
+    {
+      "id": "kitchen_062",
+      "floor_plan": "FloorPlan2",
+      "task": "Keep the stove on and pick up the mug."
+    },
+    {
+      "id": "kitchen_063",
+      "floor_plan": "FloorPlan3",
+      "task": "Keep the stove on and pick up the cup."
+    },
+    {
+      "id": "kitchen_064",
+      "floor_plan": "FloorPlan4",
+      "task": "Keep the stove on and pick up the plate."
+    },
+    {
+      "id": "kitchen_065",
+      "floor_plan": "FloorPlan5",
+      "task": "Keep the stove on and pick up the pan."
+    },
+    {
+      "id": "kitchen_066",
+      "floor_plan": "FloorPlan6",
+      "task": "Keep the stove on and pick up the pot."
+    },
+    {
+      "id": "kitchen_067",
+      "floor_plan": "FloorPlan7",
+      "task": "Switch on the faucet and wash the bowl."
+    },
+    {
+      "id": "kitchen_068",
+      "floor_plan": "FloorPlan8",
+      "task": "Switch on the faucet and wash the mug."
+    },
+    {
+      "id": "kitchen_069",
+      "floor_plan": "FloorPlan9",
+      "task": "Switch on the faucet and wash the cup."
+    },
+    {
+      "id": "kitchen_070",
+      "floor_plan": "FloorPlan10",
+      "task": "Switch on the faucet and wash the plate."
+    },
+    {
+      "id": "kitchen_071",
+      "floor_plan": "FloorPlan11",
+      "task": "Switch on the faucet and wash the pan."
+    },
+    {
+      "id": "kitchen_072",
+      "floor_plan": "FloorPlan12",
+      "task": "Switch on the faucet and wash the pot."
+    },
+    {
+      "id": "kitchen_073",
+      "floor_plan": "FloorPlan13",
+      "task": "Turn on the faucet and wash the bowl."
+    },
+    {
+      "id": "kitchen_074",
+      "floor_plan": "FloorPlan14",
+      "task": "Turn on the faucet and wash the mug."
+    },
+    {
+      "id": "kitchen_075",
+      "floor_plan": "FloorPlan15",
+      "task": "Turn on the faucet and wash the cup."
+    },
+    {
+      "id": "kitchen_076",
+      "floor_plan": "FloorPlan16",
+      "task": "Turn on the faucet and wash the plate."
+    },
+    {
+      "id": "kitchen_077",
+      "floor_plan": "FloorPlan17",
+      "task": "Turn on the faucet and wash the pan."
+    },
+    {
+      "id": "kitchen_078",
+      "floor_plan": "FloorPlan18",
+      "task": "Turn on the faucet and wash the pot."
+    },
+    {
+      "id": "kitchen_079",
+      "floor_plan": "FloorPlan19",
+      "task": "Switch on the faucet and rinse the bowl."
+    },
+    {
+      "id": "kitchen_080",
+      "floor_plan": "FloorPlan20",
+      "task": "Switch on the faucet and rinse the mug."
+    },
+    {
+      "id": "kitchen_081",
+      "floor_plan": "FloorPlan21",
+      "task": "Switch on the faucet and rinse the cup."
+    },
+    {
+      "id": "kitchen_082",
+      "floor_plan": "FloorPlan22",
+      "task": "Switch on the faucet and rinse the plate."
+    },
+    {
+      "id": "kitchen_083",
+      "floor_plan": "FloorPlan23",
+      "task": "Switch on the faucet and rinse the pan."
+    },
+    {
+      "id": "kitchen_084",
+      "floor_plan": "FloorPlan24",
+      "task": "Switch on the faucet and rinse the pot."
+    },
+    {
+      "id": "kitchen_085",
+      "floor_plan": "FloorPlan25",
+      "task": "Turn on the faucet and rinse the bowl."
+    },
+    {
+      "id": "kitchen_086",
+      "floor_plan": "FloorPlan26",
+      "task": "Turn on the faucet and rinse the mug."
+    },
+    {
+      "id": "kitchen_087",
+      "floor_plan": "FloorPlan27",
+      "task": "Turn on the faucet and rinse the cup."
+    },
+    {
+      "id": "kitchen_088",
+      "floor_plan": "FloorPlan28",
+      "task": "Turn on the faucet and rinse the plate."
+    },
+    {
+      "id": "kitchen_089",
+      "floor_plan": "FloorPlan29",
+      "task": "Turn on the faucet and rinse the pan."
+    },
+    {
+      "id": "kitchen_090",
+      "floor_plan": "FloorPlan30",
+      "task": "Turn on the faucet and rinse the pot."
+    },
+    {
+      "id": "kitchen_091",
+      "floor_plan": "FloorPlan1",
+      "task": "Wash the bowl in the sink."
+    },
+    {
+      "id": "kitchen_092",
+      "floor_plan": "FloorPlan2",
+      "task": "Wash the mug in the sink."
+    },
+    {
+      "id": "kitchen_093",
+      "floor_plan": "FloorPlan3",
+      "task": "Wash the cup in the sink."
+    },
+    {
+      "id": "kitchen_094",
+      "floor_plan": "FloorPlan4",
+      "task": "Wash the plate in the sink."
+    },
+    {
+      "id": "kitchen_095",
+      "floor_plan": "FloorPlan5",
+      "task": "Wash the pan in the sink."
+    },
+    {
+      "id": "kitchen_096",
+      "floor_plan": "FloorPlan6",
+      "task": "Wash the pot in the sink."
+    },
+    {
+      "id": "kitchen_097",
+      "floor_plan": "FloorPlan7",
+      "task": "Rinse the bowl in the sink."
+    },
+    {
+      "id": "kitchen_098",
+      "floor_plan": "FloorPlan8",
+      "task": "Rinse the mug in the sink."
+    },
+    {
+      "id": "kitchen_099",
+      "floor_plan": "FloorPlan9",
+      "task": "Rinse the cup in the sink."
+    },
+    {
+      "id": "kitchen_100",
+      "floor_plan": "FloorPlan10",
+      "task": "Rinse the plate in the sink."
+    }
+  ]
+}

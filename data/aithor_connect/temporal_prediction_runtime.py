@@ -1,36 +1,19 @@
-"""Runtime helpers for action-level safety prediction.
+"""Runtime adapters for temporal prediction baselines used in RQ3."""
 
-This module runs the trained prediction model before each planner-visible
-action. It mirrors the monitor-trace schema so that prediction logs and
-post-action RT-Lola labels can be compared row by row.
-"""
+from __future__ import annotations
 
 import csv
 import json
 from pathlib import Path
 from typing import Dict, Optional
 
-from prediction.calibration import apply_calibration
-from prediction.infer import build_prediction_set, load_prediction_stack
+import joblib
+import numpy as np
+import pandas as pd
 
 
-PREDICTION_THRESHOLD = 0.75
-
-SENSITIVE_THROW_OBJECT_TYPES = {
-    "Plate",
-    "Bowl",
-    "Cup",
-    "Mug",
-    "Vase",
-    "Egg",
-    "WineBottle",
-    "Laptop",
-    "CellPhone",
-    "AlarmClock",
-    "CD",
-    "KeyChain",
-    "Box",
-}
+ROOT = Path(__file__).resolve().parents[2]
+ARTIFACT_DIR = ROOT / "baseline_model" / "temporal_prediction_artifacts"
 
 PREDICTION_TRACE_FIELDS = [
     "pre_time",
@@ -54,26 +37,26 @@ PREDICTION_TRACE_FIELDS = [
     "pred_unsafe_label",
     "pred_confidence",
     "pred_prediction_set",
+    "temporal_predictor",
 ]
 
 
-def init_prediction_runtime(task_dir: str) -> Dict[str, object]:
-    """Initialize the action-level prediction runtime.
-
-    Args:
-        task_dir: Task-specific log directory.
-
-    Returns:
-        Runtime dictionary holding model artifacts and output file paths.
-    """
-    prediction_dir = Path(task_dir)
-    trace_path = prediction_dir / "prediction_trace.csv"
+def init_prediction_runtime(task_dir: str, method: str) -> Dict[str, object]:
+    trace_path = Path(task_dir) / "prediction_trace.csv"
     _write_csv_header(trace_path, PREDICTION_TRACE_FIELDS)
+    artifact_path = ARTIFACT_DIR / f"{method}_runtime.joblib"
+    if not artifact_path.exists():
+        raise FileNotFoundError(
+            f"Missing temporal predictor artifact: {artifact_path}. "
+            "Run scripts/train_temporal_prediction_runtimes.py first."
+        )
+    artifact = joblib.load(artifact_path)
     return {
         "enabled": True,
+        "method": method,
         "trace_path": trace_path,
-        "stack": load_prediction_stack(),
-        "threshold": PREDICTION_THRESHOLD,
+        "artifact": artifact,
+        "threshold": float(artifact.get("threshold", 0.5)),
     }
 
 
@@ -82,41 +65,44 @@ def record_prediction(
     pre_state: Dict[str, object],
     action_info: Dict[str, str],
 ) -> Dict[str, object]:
-    """Predict safety risk for one planner-visible action and append one row.
-
-    Args:
-        prediction_state: Runtime dictionary returned by `init_prediction_runtime`.
-        pre_state: Current action pre-state from the monitoring runtime.
-        action_info: Normalized action descriptor.
-
-    Returns:
-        Prediction dictionary containing probability, label, confidence, and set.
-    """
     if not prediction_state or not prediction_state.get("enabled", False):
-        return {
-            "unsafe_probability": 0.0,
-            "unsafe_label": 0,
-            "confidence": 1.0,
-            "prediction_set": [0],
-        }
+        return _safe_result()
 
-    stack = prediction_state["stack"]
-    threshold = float(prediction_state["threshold"])
-
+    method = str(prediction_state["method"])
+    artifact = prediction_state["artifact"]
     frame = _build_prediction_frame(pre_state, action_info)
-    transformed = stack["transformer"].transform(frame)
-    raw_probability = stack["model"].predict_proba(transformed)[:, 1]
-    calibrated_probability = apply_calibration(stack["calibrator"], raw_probability)
-    unsafe_probability = float(calibrated_probability[0])
+    transformed = artifact["transformer"].transform(frame)
+
+    if method == "multidimspci":
+        center = float(np.clip(artifact["model"].predict(transformed)[0], 0.0, 1.0))
+        unsafe_probability = float(np.clip(center + float(artifact["residual_quantile"]), 0.0, 1.0))
+    elif method == "cptc":
+        state_prob = artifact["state_model"].predict_proba(transformed)[0]
+        state_scores = []
+        for model, quantile in zip(artifact["state_models"], artifact["state_quantiles"]):
+            state_scores.append(float(np.clip(model.predict(transformed)[0] + float(quantile), 0.0, 1.0)))
+        unsafe_probability = float(np.clip(max(state_scores), 0.0, 1.0))
+        point_probability = float(
+            np.clip(
+                sum(
+                    prob * float(np.clip(model.predict(transformed)[0], 0.0, 1.0))
+                    for prob, model in zip(state_prob, artifact["state_models"])
+                ),
+                0.0,
+                1.0,
+            )
+        )
+        unsafe_probability = max(unsafe_probability, point_probability)
+    else:
+        raise ValueError(f"Unknown temporal predictor method: {method}")
+
+    threshold = float(prediction_state["threshold"])
     unsafe_label = 1 if unsafe_probability >= threshold else 0
     if _hazard_requires_repair(pre_state, action_info):
         unsafe_probability = max(unsafe_probability, threshold)
         unsafe_label = 1
     confidence = float(max(unsafe_probability, 1.0 - unsafe_probability))
-    prediction_set = build_prediction_set(
-        unsafe_probability=unsafe_probability,
-        quantile=float(stack["conformal_summary"]["quantile"]),
-    )
+    prediction_set = [1] if unsafe_label else [0]
 
     result = {
         "unsafe_probability": round(unsafe_probability, 6),
@@ -124,15 +110,21 @@ def record_prediction(
         "confidence": round(confidence, 6),
         "prediction_set": prediction_set,
     }
-    trace_row = _build_prediction_row(pre_state, action_info, result)
-    _append_row(prediction_state["trace_path"], PREDICTION_TRACE_FIELDS, trace_row)
+    row = _build_prediction_row(pre_state, action_info, result, method)
+    _append_row(prediction_state["trace_path"], PREDICTION_TRACE_FIELDS, row)
     return result
 
 
-def _build_prediction_frame(pre_state: Dict[str, object], action_info: Dict[str, str]):
-    """Convert one runtime state/action pair into the inference input frame."""
-    import pandas as pd
+def _safe_result() -> Dict[str, object]:
+    return {
+        "unsafe_probability": 0.0,
+        "unsafe_label": 0,
+        "confidence": 1.0,
+        "prediction_set": [0],
+    }
 
+
+def _build_prediction_frame(pre_state: Dict[str, object], action_info: Dict[str, str]) -> pd.DataFrame:
     row = {
         "pre_time": float(pre_state["time"]),
         "label_time": float(pre_state["time"]),
@@ -160,8 +152,8 @@ def _build_prediction_row(
     pre_state: Dict[str, object],
     action_info: Dict[str, str],
     result: Dict[str, object],
+    method: str,
 ) -> Dict[str, object]:
-    """Create one row for `prediction_trace.csv`."""
     return {
         "pre_time": pre_state["time"],
         "action": action_info["action"],
@@ -184,31 +176,25 @@ def _build_prediction_row(
         "pred_unsafe_label": result["unsafe_label"],
         "pred_confidence": result["confidence"],
         "pred_prediction_set": json.dumps(result["prediction_set"]),
+        "temporal_predictor": method,
     }
 
 
 def _write_csv_header(path: Path, fieldnames) -> None:
-    """Create an empty CSV file with a header row."""
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
+        csv.DictWriter(handle, fieldnames=fieldnames).writeheader()
 
 
 def _append_row(path: Path, fieldnames, row: Dict[str, object]) -> None:
-    """Append one row using a stable field order."""
     with path.open("a", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writerow(row)
+        csv.DictWriter(handle, fieldnames=fieldnames).writerow(row)
 
 
 def _bool_to_int(value) -> int:
-    """Normalize bool-like runtime values into 0/1 integers for inference."""
-    text = str(value).strip().lower()
-    return 1 if text in {"1", "true"} else 0
+    return 1 if str(value).strip().lower() in {"1", "true"} else 0
 
 
 def _hazard_requires_repair(pre_state: Dict[str, object], action_info: Dict[str, str]) -> bool:
-    """Deterministically block non-mitigation actions while hazards are active."""
     action = str(action_info.get("action", ""))
     action_object = str(action_info.get("action_object", ""))
     if action == "ThrowObject" and _is_sensitive_throw_object(action_object):
@@ -224,7 +210,19 @@ def _hazard_requires_repair(pre_state: Dict[str, object], action_info: Dict[str,
 
 def _is_sensitive_throw_object(object_type: str) -> bool:
     normalized = str(object_type).replace(" ", "").lower()
-    return any(
-        sensitive_type.replace(" ", "").lower() in normalized
-        for sensitive_type in SENSITIVE_THROW_OBJECT_TYPES
-    )
+    sensitive_types = {
+        "plate",
+        "bowl",
+        "cup",
+        "mug",
+        "vase",
+        "egg",
+        "winebottle",
+        "laptop",
+        "cellphone",
+        "alarmclock",
+        "cd",
+        "keychain",
+        "box",
+    }
+    return any(sensitive in normalized for sensitive in sensitive_types)

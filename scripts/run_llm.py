@@ -367,14 +367,22 @@ if __name__ == "__main__":
         default="output_contract",
         choices=["output_contract"],
     )
+    parser.add_argument(
+        "--log-root",
+        type=str,
+        default="logs",
+        help="Directory where generated planner log folders are written.",
+    )
     parser.add_argument("--log-results", type=bool, default=True)
 
     args = parser.parse_args()
 
     client = build_openai_client(args.deepseek_api_key_file)
 
-    if not os.path.isdir("./logs/"):
-        os.makedirs("./logs/")
+    log_root = Path(args.log_root)
+    if not log_root.is_absolute():
+        log_root = Path(os.getcwd()) / log_root
+    log_root.mkdir(parents=True, exist_ok=True)
 
     planner_items = load_planner_input(
         input_path=Path(args.input_file),
@@ -468,7 +476,10 @@ if __name__ == "__main__":
                     "sections, team reasoning, or multiple robots. If the task says "
                     "'put it aside', 'throw it aside', or 'move it away' without "
                     "explicitly naming a receptacle, interpret it as ThrowObject "
-                    "rather than PutObject."
+                    "rather than PutObject. When washing objects, use SinkBasin "
+                    "instead of Sink as the receptacle target. When heating bread, "
+                    "slice Bread with a knife first, put down the knife, then pick "
+                    "up BreadSliced and place BreadSliced into the microwave."
                 ),
             },
             {"role": "user", "content": curr_prompt},
@@ -485,29 +496,28 @@ if __name__ == "__main__":
 
     if args.log_results:
         now = datetime.now()
-        date_time = now.strftime("%m-%d-%Y-%H-%M-%S")
+        date_time = now.strftime("%m-%d-%Y-%H-%M-%S-%f")
 
         for idx, task in enumerate(test_tasks):
             folder_name = f"{sanitize_task_name(task)}_plans_{date_time}"
-            os.mkdir("./logs/" + folder_name)
+            task_log_dir = log_root / folder_name
+            task_log_dir.mkdir()
 
-            with open(f"./logs/{folder_name}/log.txt", "w", encoding="utf-8") as f:
+            with (task_log_dir / "log.txt").open("w", encoding="utf-8") as f:
                 f.write(task)
                 f.write(f"\n\nGPT Version: {args.model}")
                 f.write(f"\n\nFloor Plan: {floor_plan_full_by_task[idx]}")
                 f.write(f"\n{objects_ai_by_task[idx]}")
                 f.write(f"\nrobot = {single_robots[idx]}")
 
-            with open(f"./logs/{folder_name}/decomposed_plan.py", "w", encoding="utf-8") as d:
+            with (task_log_dir / "decomposed_plan.py").open("w", encoding="utf-8") as d:
                 d.write(decomposed_plan[idx])
 
-            with open(f"./logs/{folder_name}/raw_code_plan.py", "w", encoding="utf-8") as x:
+            with (task_log_dir / "raw_code_plan.py").open("w", encoding="utf-8") as x:
                 x.write(raw_code_plan[idx])
 
-            with open(f"./logs/{folder_name}/code_plan.py", "w", encoding="utf-8") as x:
+            with (task_log_dir / "code_plan.py").open("w", encoding="utf-8") as x:
                 x.write(normalized_code_plan[idx])
 
-            with open(
-                f"./logs/{folder_name}/validation_report.json", "w", encoding="utf-8"
-            ) as report_file:
+            with (task_log_dir / "validation_report.json").open("w", encoding="utf-8") as report_file:
                 json.dump(validation_reports[idx], report_file, indent=2, ensure_ascii=False)

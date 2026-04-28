@@ -21,6 +21,7 @@ repair_import_error = None
 visual_task_dir = None
 visual_recording_enabled = False
 visual_frame_counter = 0
+UNRECOVERABLE_REPAIR_EXIT_CODE = 42
 
 try:
     monitor_module_dir = Path(os.getcwd()) / "data" / "aithor_connect"
@@ -103,6 +104,51 @@ def _find_first_object(pattern):
     if matches:
         return matches[0]
     raise ValueError("Cannot find object matching pattern: %s" % pattern)
+
+
+def _sorted_target_matches(pattern, robot_or_robots):
+    """Return matching objects sorted by current distance to the lead robot."""
+    robots_list = _ensure_robot_list(robot_or_robots)
+    agent_id = _get_agent_id(robots_list[0])
+    agent_position = c.last_event.events[agent_id].metadata["agent"]["position"]
+    matches = _find_object_matches(pattern)
+    valid_matches = []
+    for obj in matches:
+        center = obj["axisAlignedBoundingBox"]["center"]
+        if center == {"x": 0.0, "y": 0.0, "z": 0.0}:
+            continue
+        valid_matches.append(obj)
+    if not valid_matches:
+        return matches
+    return sorted(
+        valid_matches,
+        key=lambda obj: distance_pts(
+            [agent_position["x"], agent_position["y"], agent_position["z"]],
+            [
+                obj["axisAlignedBoundingBox"]["center"]["x"],
+                obj["axisAlignedBoundingBox"]["center"]["y"],
+                obj["axisAlignedBoundingBox"]["center"]["z"],
+            ],
+        ),
+    )
+
+
+def _recover_navigation_block(agent_id):
+    """Try lightweight recovery moves before retrying navigation."""
+    recovery_steps = [
+        dict(action="RotateRight", degrees=45, agentId=agent_id),
+        dict(action="MoveBack", agentId=agent_id),
+        dict(action="RotateLeft", degrees=90, agentId=agent_id),
+    ]
+    any_success = False
+    for step_kwargs in recovery_steps:
+        try:
+            event = _step_and_check(forceAction=True, **step_kwargs)
+        except Exception:
+            continue
+        if event.metadata.get("lastActionSuccess", False):
+            any_success = True
+    return any_success
 
 
 def _init_visual_recording(task_dir):
@@ -283,7 +329,7 @@ def _mark_task_action(success):
         task_sr = 0
 
 
-def _record_monitoring(action_name, action_object, action_receptacle="0", throw_magnitude=0.0):
+def _record_monitoring(action_name, action_object, action_receptacle="0", throw_magnitude=0.0, success=True):
     """Record one completed planner-visible action for monitoring.
 
     Args:
@@ -305,6 +351,7 @@ def _record_monitoring(action_name, action_object, action_receptacle="0", throw_
         controller=c,
         action_info=action_info,
         throw_magnitude=throw_magnitude,
+        action_success=success,
     )
     print("Monitor unsafe=%s" % result["unsafe"])
 
@@ -384,6 +431,18 @@ def _dispatch_repair_action(repair_action):
     raise ValueError("Unsupported repair action type: %s" % action_type)
 
 
+def _coerce_action_success(result):
+    """Normalize action wrapper returns into a boolean success flag."""
+    if isinstance(result, bool):
+        return result
+    if result is None:
+        return False
+    metadata = getattr(result, "metadata", None)
+    if isinstance(metadata, dict):
+        return bool(metadata.get("lastActionSuccess", False))
+    return False
+
+
 def _should_skip_original_action(action_name, action_object, action_receptacle="0"):
     """Skip original plan actions that were already executed during repair."""
     if should_skip_action is None or build_action_info is None:
@@ -402,7 +461,7 @@ def _should_skip_original_action(action_name, action_object, action_receptacle="
 
 
 def _maybe_execute_repair(action_name, action_object, action_receptacle, prediction_result):
-    """Trigger standalone RAG repair instead of executing a blocked action."""
+    """Trigger constrained replanning instead of executing a blocked action."""
     if not prediction_result or int(prediction_result.get("unsafe_label", 0)) != 1:
         return False
     if request_repair is None or repair_allowed is None or build_action_info is None:
@@ -415,15 +474,25 @@ def _maybe_execute_repair(action_name, action_object, action_receptacle, predict
         action_object=action_object,
         action_receptacle=action_receptacle,
     )
+    pre_state = monitor_state.get("current_state") if monitor_state else None
+    if not pre_state:
+        return False
     repair_result = request_repair(
         repair_state=repair_state,
+        pre_state=pre_state,
         action_info=action_info,
         prediction_result=prediction_result,
     )
     if not repair_result or not repair_result.get("repair_actions"):
+        if repair_result and repair_result.get("retry_required"):
+            print("Retry required for unrecoverable unsafe action: %s" % action_info)
+            raise SystemExit(UNRECOVERABLE_REPAIR_EXIT_CODE)
         return False
 
-    print("Repair replacing %s with %s actions" % (action_name, len(repair_result["repair_actions"])))
+    print(
+        "Replan replacing %s with %s actions"
+        % (action_name, len(repair_result["repair_actions"]))
+    )
     if set_pending_skip_actions is not None:
         set_pending_skip_actions(
             repair_state=repair_state,
@@ -438,7 +507,10 @@ def _maybe_execute_repair(action_name, action_object, action_receptacle, predict
     try:
         for repair_action in repair_result["repair_actions"]:
             print("Repair action: %s" % repair_action)
-            _dispatch_repair_action(repair_action)
+            action_success = _coerce_action_success(_dispatch_repair_action(repair_action))
+            if not action_success:
+                print("Repair aborted after failed action: %s" % repair_action)
+                break
     finally:
         end_repair(repair_state)
     return True
@@ -481,6 +553,7 @@ def _execute_task_action(
         action_object=action_object,
         action_receptacle=action_receptacle,
         throw_magnitude=throw_magnitude,
+        success=success,
     )
     _record_completed_action(
         action_name=action_name,
@@ -488,7 +561,7 @@ def _execute_task_action(
         action_receptacle=action_receptacle,
         success=success,
     )
-    return event
+    return success
 
 
 def GoToObject(robot_or_robots, dest_obj):
@@ -513,89 +586,128 @@ def GoToObject(robot_or_robots, dest_obj):
     if _maybe_execute_repair("GoToObject", dest_obj, "0", prediction_result):
         return
 
-    robots_list = _ensure_robot_list(robot_or_robots)
-    target_obj = _find_first_object(dest_obj)
-    target_id = target_obj["objectId"]
-    target_center = target_obj["axisAlignedBoundingBox"]["center"]
-    target_pos = [target_center["x"], target_center["y"], target_center["z"]]
-
-    distances = [10.0] * len(robots_list)
-    prev_distances = [10.0] * len(robots_list)
-    stalled_counts = [0] * len(robots_list)
-    closest_offsets = [0] * len(robots_list)
-    goal_points = closest_node(target_pos, reachable_positions, len(robots_list), closest_offsets)
     action_success = True
+    robots_list = _ensure_robot_list(robot_or_robots)
+    target_candidates = _sorted_target_matches(dest_obj, robots_list)
+    if not target_candidates:
+        raise ValueError("Cannot find object matching pattern: %s" % dest_obj)
 
-    while all(distance > 0.25 for distance in distances):
-        for idx, robot in enumerate(robots_list):
-            agent_id = _get_agent_id(robot)
-            metadata = c.last_event.events[agent_id].metadata
-            location = metadata["agent"]["position"]
+    target_id = None
+    target_pos = None
+    reached_target = False
 
-            prev_distances[idx] = distances[idx]
-            distances[idx] = distance_pts(
-                [location["x"], location["y"], location["z"]],
-                goal_points[idx],
-            )
+    for target_obj in target_candidates[:5]:
+        target_id = target_obj["objectId"]
+        target_center = target_obj["axisAlignedBoundingBox"]["center"]
+        target_pos = [target_center["x"], target_center["y"], target_center["z"]]
 
-            if abs(distances[idx] - prev_distances[idx]) < 0.2:
-                stalled_counts[idx] += 1
-            else:
-                stalled_counts[idx] = 0
+        distances = [10.0] * len(robots_list)
+        prev_distances = [10.0] * len(robots_list)
+        stalled_counts = [0] * len(robots_list)
+        closest_offsets = [0] * len(robots_list)
+        goal_points = closest_node(target_pos, reachable_positions, len(robots_list), closest_offsets)
+        loop_guard = 0
 
-            if stalled_counts[idx] >= 8:
-                closest_offsets[idx] += 1
-                stalled_counts[idx] = 0
-                goal_points = closest_node(target_pos, reachable_positions, len(robots_list), closest_offsets)
+        while all(distance > 0.25 for distance in distances):
+            loop_guard += 1
+            if loop_guard > 220:
+                action_success = False
+                break
 
-            nav_event = c.step(
-                dict(
-                    action="ObjectNavExpertAction",
-                    position=dict(
-                        x=goal_points[idx][0],
-                        y=goal_points[idx][1],
-                        z=goal_points[idx][2],
-                    ),
-                    agentId=agent_id,
+            candidate_failed = False
+            for idx, robot in enumerate(robots_list):
+                agent_id = _get_agent_id(robot)
+                metadata = c.last_event.events[agent_id].metadata
+                location = metadata["agent"]["position"]
+
+                prev_distances[idx] = distances[idx]
+                distances[idx] = distance_pts(
+                    [location["x"], location["y"], location["z"]],
+                    goal_points[idx],
                 )
-            )
-            next_action = nav_event.metadata.get("actionReturn")
-            if next_action is not None:
+
+                if abs(distances[idx] - prev_distances[idx]) < 0.1:
+                    stalled_counts[idx] += 1
+                else:
+                    stalled_counts[idx] = 0
+
+                if stalled_counts[idx] >= 6:
+                    closest_offsets[idx] += 1
+                    stalled_counts[idx] = 0
+                    if closest_offsets[idx] >= 6:
+                        if not _recover_navigation_block(agent_id):
+                            candidate_failed = True
+                            action_success = False
+                            break
+                    goal_points = closest_node(target_pos, reachable_positions, len(robots_list), closest_offsets)
+
+                nav_event = c.step(
+                    dict(
+                        action="ObjectNavExpertAction",
+                        position=dict(
+                            x=goal_points[idx][0],
+                            y=goal_points[idx][1],
+                            z=goal_points[idx][2],
+                        ),
+                        agentId=agent_id,
+                    )
+                )
+                next_action = nav_event.metadata.get("actionReturn")
+                if next_action is None:
+                    stalled_counts[idx] += 2
+                    continue
+
                 step_event = _step_and_check(action=next_action, agentId=agent_id, forceAction=True)
                 if not step_event.metadata.get("lastActionSuccess", False):
+                    stalled_counts[idx] += 2
                     action_success = False
+                    error_message = step_event.metadata.get("errorMessage", "")
+                    if "blocking" in error_message.lower():
+                        _recover_navigation_block(agent_id)
 
-        time.sleep(0.05)
+            if candidate_failed:
+                break
+
+            time.sleep(0.05)
+
+        if all(distance <= 0.25 for distance in distances):
+            reached_target = True
+            break
+
+    if not reached_target:
+        action_success = False
 
     # Face the target after reaching its neighborhood to improve interaction success.
-    anchor_robot = robots_list[0]
-    agent_id = _get_agent_id(anchor_robot)
-    metadata = c.last_event.events[agent_id].metadata
-    robot_position = metadata["agent"]["position"]
-    robot_rotation = metadata["agent"]["rotation"]["y"]
-    vector_to_target = np.array(
-        [target_pos[0] - robot_position["x"], target_pos[2] - robot_position["z"]]
-    )
-    if np.linalg.norm(vector_to_target) > 0:
-        unit_y = np.array([0.0, 1.0])
-        unit_vector = vector_to_target / np.linalg.norm(vector_to_target)
-        angle = math.degrees(math.atan2(np.linalg.det([unit_vector, unit_y]), np.dot(unit_vector, unit_y)))
-        angle = (angle + 360.0) % 360.0
-        rotation_delta = angle - robot_rotation
-        if rotation_delta > 0:
-            rotate_event = _step_and_check(action="RotateRight", degrees=abs(rotation_delta), agentId=agent_id)
-        else:
-            rotate_event = _step_and_check(action="RotateLeft", degrees=abs(rotation_delta), agentId=agent_id)
-        if not rotate_event.metadata.get("lastActionSuccess", False):
-            action_success = False
+    if reached_target and target_pos is not None:
+        anchor_robot = robots_list[0]
+        agent_id = _get_agent_id(anchor_robot)
+        metadata = c.last_event.events[agent_id].metadata
+        robot_position = metadata["agent"]["position"]
+        robot_rotation = metadata["agent"]["rotation"]["y"]
+        vector_to_target = np.array(
+            [target_pos[0] - robot_position["x"], target_pos[2] - robot_position["z"]]
+        )
+        if np.linalg.norm(vector_to_target) > 0:
+            unit_y = np.array([0.0, 1.0])
+            unit_vector = vector_to_target / np.linalg.norm(vector_to_target)
+            angle = math.degrees(math.atan2(np.linalg.det([unit_vector, unit_y]), np.dot(unit_vector, unit_y)))
+            angle = (angle + 360.0) % 360.0
+            rotation_delta = angle - robot_rotation
+            if rotation_delta > 0:
+                rotate_event = _step_and_check(action="RotateRight", degrees=abs(rotation_delta), agentId=agent_id)
+            else:
+                rotate_event = _step_and_check(action="RotateLeft", degrees=abs(rotation_delta), agentId=agent_id)
+            if not rotate_event.metadata.get("lastActionSuccess", False):
+                action_success = False
 
-    if dest_obj in ("Cabinet", "Fridge", "CounterTop"):
+    if dest_obj in ("Cabinet", "Fridge", "CounterTop", "SinkBasin", "Microwave") and target_id is not None:
         recp_id = target_id
 
     _mark_task_action(action_success)
     print("GoToObject success=%s" % action_success)
-    _record_monitoring("GoToObject", dest_obj)
+    _record_monitoring("GoToObject", dest_obj, success=action_success)
     _record_completed_action("GoToObject", dest_obj, success=action_success)
+    return action_success
 
 
 def PickupObject(robot_or_robots, pick_obj):
@@ -605,7 +717,7 @@ def PickupObject(robot_or_robots, pick_obj):
     target_id = target_obj["objectId"]
 
     for robot in robots_list:
-        _execute_task_action(
+        return _execute_task_action(
             "PickupObject",
             action_object=pick_obj,
             action="PickupObject",
@@ -625,7 +737,7 @@ def PutObject(robot, put_obj, recp):
         receptacle_candidates,
         key=lambda item: item.get("distance", float("inf")),
     )
-    _execute_task_action(
+    return _execute_task_action(
         "PutObject",
         action_object=put_obj,
         action_receptacle=recp,
@@ -658,13 +770,13 @@ def SwitchOn(robot, sw_obj):
             time.sleep(0.1)
         _mark_task_action(action_success)
         print("SwitchOn success=%s" % action_success)
-        _record_monitoring("SwitchOn", sw_obj)
+        _record_monitoring("SwitchOn", sw_obj, success=action_success)
         _record_completed_action("SwitchOn", sw_obj, success=action_success)
-        return
+        return action_success
 
     if not candidates:
         raise ValueError("Cannot find switchable object matching pattern: %s" % sw_obj)
-    _execute_task_action(
+    return _execute_task_action(
         "SwitchOn",
         action_object=sw_obj,
         action="ToggleObjectOn",
@@ -696,13 +808,13 @@ def SwitchOff(robot, sw_obj):
             time.sleep(0.1)
         _mark_task_action(action_success)
         print("SwitchOff success=%s" % action_success)
-        _record_monitoring("SwitchOff", sw_obj)
+        _record_monitoring("SwitchOff", sw_obj, success=action_success)
         _record_completed_action("SwitchOff", sw_obj, success=action_success)
-        return
+        return action_success
 
     if not candidates:
         raise ValueError("Cannot find switchable object matching pattern: %s" % sw_obj)
-    _execute_task_action(
+    return _execute_task_action(
         "SwitchOff",
         action_object=sw_obj,
         action="ToggleObjectOff",
@@ -716,11 +828,10 @@ def OpenObject(robot, sw_obj):
     """Open an interactable object."""
     global recp_id
 
-    target_id = recp_id
-    if target_id is None:
-        target_id = _find_first_object(sw_obj)["objectId"]
+    target_id = _find_first_object(sw_obj)["objectId"]
+    recp_id = target_id
 
-    _execute_task_action(
+    return _execute_task_action(
         "OpenObject",
         action_object=sw_obj,
         action="OpenObject",
@@ -734,11 +845,9 @@ def CloseObject(robot, sw_obj):
     """Close an interactable object."""
     global recp_id
 
-    target_id = recp_id
-    if target_id is None:
-        target_id = _find_first_object(sw_obj)["objectId"]
+    target_id = _find_first_object(sw_obj)["objectId"]
 
-    _execute_task_action(
+    result = _execute_task_action(
         "CloseObject",
         action_object=sw_obj,
         action="CloseObject",
@@ -747,12 +856,13 @@ def CloseObject(robot, sw_obj):
         forceAction=True,
     )
     recp_id = None
+    return result
 
 
 def BreakObject(robot, sw_obj):
     """Break the target object."""
     target = _find_first_object(sw_obj)
-    _execute_task_action(
+    return _execute_task_action(
         "BreakObject",
         action_object=sw_obj,
         action="BreakObject",
@@ -765,7 +875,7 @@ def BreakObject(robot, sw_obj):
 def SliceObject(robot, sw_obj):
     """Slice the target object."""
     target = _find_first_object(sw_obj)
-    _execute_task_action(
+    return _execute_task_action(
         "SliceObject",
         action_object=sw_obj,
         action="SliceObject",
@@ -777,7 +887,7 @@ def SliceObject(robot, sw_obj):
 
 def ThrowObject(robot, sw_obj, moveMagnitude=7):
     """Throw the currently held object."""
-    _execute_task_action(
+    return _execute_task_action(
         "ThrowObject",
         action_object=sw_obj,
         throw_magnitude=moveMagnitude,

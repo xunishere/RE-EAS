@@ -28,6 +28,7 @@ from monitor_signals import (
     clear_fragile_throw_event,
     clear_last_throw_magnitude,
     create_monitor_context,
+    set_last_action_success,
     set_fragile_throw_event,
     set_last_throw_magnitude,
 )
@@ -43,6 +44,10 @@ TRACE_FIELDS = [
     "pre_stove_on",
     "pre_cellphone_in_microwave",
     "pre_laptop_in_microwave",
+    "pre_bread_in_microwave",
+    "pre_breadsliced_in_microwave",
+    "pre_cellphone_in_sink",
+    "pre_laptop_in_sink",
     "pre_microwave_on_duration",
     "pre_stove_on_duration",
     "pre_faucet_on",
@@ -50,8 +55,12 @@ TRACE_FIELDS = [
     "pre_cellphone_to_faucet_dist",
     "pre_laptop_to_faucet_dist",
     "pre_holding_fragile_obj",
+    "pre_inventory_count",
+    "pre_held_object_type",
+    "pre_microwave_open",
     "pre_fragile_throw_event",
     "pre_throw_magnitude",
+    "pre_last_action_success",
     "unsafe",
 ]
 
@@ -115,6 +124,7 @@ def record_post_action(
     controller,
     action_info: Dict[str, str],
     throw_magnitude: float = 0.0,
+    action_success: bool = True,
 ) -> Dict[str, object]:
     """Record one completed task action using the prediction-oriented workflow.
 
@@ -150,6 +160,7 @@ def record_post_action(
     else:
         clear_last_throw_magnitude(context)
         clear_fragile_throw_event(context)
+    set_last_action_success(context, action_success)
 
     post_state = build_state_snapshot(controller, context)
     _append_row(monitor_state["stream_path"], STREAM_FIELDS, post_state)
@@ -223,6 +234,10 @@ def _build_trace_row(
         "pre_stove_on": pre_state["stove_on"],
         "pre_cellphone_in_microwave": pre_state["cellphone_in_microwave"],
         "pre_laptop_in_microwave": pre_state["laptop_in_microwave"],
+        "pre_bread_in_microwave": pre_state["bread_in_microwave"],
+        "pre_breadsliced_in_microwave": pre_state["breadsliced_in_microwave"],
+        "pre_cellphone_in_sink": pre_state["cellphone_in_sink"],
+        "pre_laptop_in_sink": pre_state["laptop_in_sink"],
         "pre_microwave_on_duration": pre_state["microwave_on_duration"],
         "pre_stove_on_duration": pre_state["stove_on_duration"],
         "pre_faucet_on": pre_state["faucet_on"],
@@ -230,8 +245,12 @@ def _build_trace_row(
         "pre_cellphone_to_faucet_dist": pre_state["cellphone_to_faucet_dist"],
         "pre_laptop_to_faucet_dist": pre_state["laptop_to_faucet_dist"],
         "pre_holding_fragile_obj": pre_state["holding_fragile_obj"],
+        "pre_inventory_count": pre_state["inventory_count"],
+        "pre_held_object_type": pre_state["held_object_type"],
+        "pre_microwave_open": pre_state["microwave_open"],
         "pre_fragile_throw_event": pre_state["fragile_throw_event"],
         "pre_throw_magnitude": pre_state["throw_magnitude"],
+        "pre_last_action_success": pre_state["last_action_success"],
         "unsafe": unsafe,
     }
 

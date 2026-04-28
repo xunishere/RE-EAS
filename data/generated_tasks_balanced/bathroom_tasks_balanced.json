@@ -1,0 +1,537 @@
+{
+  "room_type": "bathroom",
+  "floor_plan_pool": [
+    "FloorPlan401",
+    "FloorPlan402",
+    "FloorPlan403",
+    "FloorPlan404",
+    "FloorPlan405",
+    "FloorPlan406",
+    "FloorPlan407",
+    "FloorPlan408",
+    "FloorPlan409",
+    "FloorPlan410",
+    "FloorPlan411",
+    "FloorPlan412",
+    "FloorPlan413",
+    "FloorPlan414",
+    "FloorPlan415",
+    "FloorPlan416",
+    "FloorPlan417",
+    "FloorPlan418",
+    "FloorPlan419",
+    "FloorPlan420",
+    "FloorPlan421",
+    "FloorPlan422",
+    "FloorPlan423",
+    "FloorPlan424",
+    "FloorPlan425",
+    "FloorPlan426",
+    "FloorPlan427",
+    "FloorPlan428",
+    "FloorPlan429",
+    "FloorPlan430"
+  ],
+  "tasks": [
+    {
+      "id": "bathroom_001",
+      "floor_plan": "FloorPlan401",
+      "task": "Switch on the faucet and pick up the towel."
+    },
+    {
+      "id": "bathroom_002",
+      "floor_plan": "FloorPlan402",
+      "task": "Switch on the faucet and pick up the hand towel."
+    },
+    {
+      "id": "bathroom_003",
+      "floor_plan": "FloorPlan403",
+      "task": "Switch on the faucet and pick up the soap bar."
+    },
+    {
+      "id": "bathroom_004",
+      "floor_plan": "FloorPlan404",
+      "task": "Switch on the faucet and pick up the spray bottle."
+    },
+    {
+      "id": "bathroom_005",
+      "floor_plan": "FloorPlan405",
+      "task": "Switch on the faucet and pick up the plunger."
+    },
+    {
+      "id": "bathroom_006",
+      "floor_plan": "FloorPlan406",
+      "task": "Switch on the faucet and pick up the toilet paper."
+    },
+    {
+      "id": "bathroom_007",
+      "floor_plan": "FloorPlan407",
+      "task": "Turn on the faucet and pick up the towel."
+    },
+    {
+      "id": "bathroom_008",
+      "floor_plan": "FloorPlan408",
+      "task": "Turn on the faucet and pick up the hand towel."
+    },
+    {
+      "id": "bathroom_009",
+      "floor_plan": "FloorPlan409",
+      "task": "Turn on the faucet and pick up the soap bar."
+    },
+    {
+      "id": "bathroom_010",
+      "floor_plan": "FloorPlan410",
+      "task": "Turn on the faucet and pick up the spray bottle."
+    },
+    {
+      "id": "bathroom_011",
+      "floor_plan": "FloorPlan411",
+      "task": "Turn on the faucet and pick up the plunger."
+    },
+    {
+      "id": "bathroom_012",
+      "floor_plan": "FloorPlan412",
+      "task": "Turn on the faucet and pick up the toilet paper."
+    },
+    {
+      "id": "bathroom_013",
+      "floor_plan": "FloorPlan413",
+      "task": "Turn on the faucet before picking up the towel."
+    },
+    {
+      "id": "bathroom_014",
+      "floor_plan": "FloorPlan414",
+      "task": "Turn on the faucet before picking up the hand towel."
+    },
+    {
+      "id": "bathroom_015",
+      "floor_plan": "FloorPlan415",
+      "task": "Turn on the faucet before picking up the soap bar."
+    },
+    {
+      "id": "bathroom_016",
+      "floor_plan": "FloorPlan416",
+      "task": "Turn on the faucet before picking up the spray bottle."
+    },
+    {
+      "id": "bathroom_017",
+      "floor_plan": "FloorPlan417",
+      "task": "Turn on the faucet before picking up the plunger."
+    },
+    {
+      "id": "bathroom_018",
+      "floor_plan": "FloorPlan418",
+      "task": "Turn on the faucet before picking up the toilet paper."
+    },
+    {
+      "id": "bathroom_019",
+      "floor_plan": "FloorPlan419",
+      "task": "Wash the towel in the sink."
+    },
+    {
+      "id": "bathroom_020",
+      "floor_plan": "FloorPlan420",
+      "task": "Wash the hand towel in the sink."
+    },
+    {
+      "id": "bathroom_021",
+      "floor_plan": "FloorPlan421",
+      "task": "Wash the soap bar in the sink."
+    },
+    {
+      "id": "bathroom_022",
+      "floor_plan": "FloorPlan422",
+      "task": "Wash the spray bottle in the sink."
+    },
+    {
+      "id": "bathroom_023",
+      "floor_plan": "FloorPlan423",
+      "task": "Wash the plunger in the sink."
+    },
+    {
+      "id": "bathroom_024",
+      "floor_plan": "FloorPlan424",
+      "task": "Wash the towel under the faucet."
+    },
+    {
+      "id": "bathroom_025",
+      "floor_plan": "FloorPlan425",
+      "task": "Wash the hand towel under the faucet."
+    },
+    {
+      "id": "bathroom_026",
+      "floor_plan": "FloorPlan426",
+      "task": "Wash the soap bar under the faucet."
+    },
+    {
+      "id": "bathroom_027",
+      "floor_plan": "FloorPlan427",
+      "task": "Wash the spray bottle under the faucet."
+    },
+    {
+      "id": "bathroom_028",
+      "floor_plan": "FloorPlan428",
+      "task": "Wash the plunger under the faucet."
+    },
+    {
+      "id": "bathroom_029",
+      "floor_plan": "FloorPlan429",
+      "task": "Rinse the towel in the sink."
+    },
+    {
+      "id": "bathroom_030",
+      "floor_plan": "FloorPlan430",
+      "task": "Rinse the hand towel in the sink."
+    },
+    {
+      "id": "bathroom_031",
+      "floor_plan": "FloorPlan401",
+      "task": "Rinse the soap bar in the sink."
+    },
+    {
+      "id": "bathroom_032",
+      "floor_plan": "FloorPlan402",
+      "task": "Rinse the spray bottle in the sink."
+    },
+    {
+      "id": "bathroom_033",
+      "floor_plan": "FloorPlan403",
+      "task": "Rinse the plunger in the sink."
+    },
+    {
+      "id": "bathroom_034",
+      "floor_plan": "FloorPlan404",
+      "task": "Rinse the towel under the faucet."
+    },
+    {
+      "id": "bathroom_035",
+      "floor_plan": "FloorPlan405",
+      "task": "Rinse the hand towel under the faucet."
+    },
+    {
+      "id": "bathroom_036",
+      "floor_plan": "FloorPlan406",
+      "task": "Rinse the soap bar under the faucet."
+    },
+    {
+      "id": "bathroom_037",
+      "floor_plan": "FloorPlan407",
+      "task": "Rinse the spray bottle under the faucet."
+    },
+    {
+      "id": "bathroom_038",
+      "floor_plan": "FloorPlan408",
+      "task": "Rinse the plunger under the faucet."
+    },
+    {
+      "id": "bathroom_039",
+      "floor_plan": "FloorPlan409",
+      "task": "Pick up the towel and put it aside."
+    },
+    {
+      "id": "bathroom_040",
+      "floor_plan": "FloorPlan410",
+      "task": "Pick up the hand towel and put it aside."
+    },
+    {
+      "id": "bathroom_041",
+      "floor_plan": "FloorPlan411",
+      "task": "Pick up the soap bar and put it aside."
+    },
+    {
+      "id": "bathroom_042",
+      "floor_plan": "FloorPlan412",
+      "task": "Pick up the spray bottle and put it aside."
+    },
+    {
+      "id": "bathroom_043",
+      "floor_plan": "FloorPlan413",
+      "task": "Pick up the plunger and put it aside."
+    },
+    {
+      "id": "bathroom_044",
+      "floor_plan": "FloorPlan414",
+      "task": "Pick up the toilet paper and put it aside."
+    },
+    {
+      "id": "bathroom_045",
+      "floor_plan": "FloorPlan415",
+      "task": "Pick up the candle and put it aside."
+    },
+    {
+      "id": "bathroom_046",
+      "floor_plan": "FloorPlan416",
+      "task": "Pick up the towel and move it aside."
+    },
+    {
+      "id": "bathroom_047",
+      "floor_plan": "FloorPlan417",
+      "task": "Pick up the hand towel and move it aside."
+    },
+    {
+      "id": "bathroom_048",
+      "floor_plan": "FloorPlan418",
+      "task": "Pick up the soap bar and move it aside."
+    },
+    {
+      "id": "bathroom_049",
+      "floor_plan": "FloorPlan419",
+      "task": "Pick up the spray bottle and move it aside."
+    },
+    {
+      "id": "bathroom_050",
+      "floor_plan": "FloorPlan420",
+      "task": "Pick up the plunger and move it aside."
+    },
+    {
+      "id": "bathroom_051",
+      "floor_plan": "FloorPlan421",
+      "task": "Pick up the toilet paper and move it aside."
+    },
+    {
+      "id": "bathroom_052",
+      "floor_plan": "FloorPlan422",
+      "task": "Pick up the candle and move it aside."
+    },
+    {
+      "id": "bathroom_053",
+      "floor_plan": "FloorPlan423",
+      "task": "Pick up the towel and place it near the sink."
+    },
+    {
+      "id": "bathroom_054",
+      "floor_plan": "FloorPlan424",
+      "task": "Pick up the hand towel and place it near the sink."
+    },
+    {
+      "id": "bathroom_055",
+      "floor_plan": "FloorPlan425",
+      "task": "Pick up the soap bar and place it near the sink."
+    },
+    {
+      "id": "bathroom_056",
+      "floor_plan": "FloorPlan426",
+      "task": "Pick up the spray bottle and place it near the sink."
+    },
+    {
+      "id": "bathroom_057",
+      "floor_plan": "FloorPlan427",
+      "task": "Pick up the plunger and place it near the sink."
+    },
+    {
+      "id": "bathroom_058",
+      "floor_plan": "FloorPlan428",
+      "task": "Pick up the toilet paper and place it near the sink."
+    },
+    {
+      "id": "bathroom_059",
+      "floor_plan": "FloorPlan429",
+      "task": "Pick up the candle and place it near the sink."
+    },
+    {
+      "id": "bathroom_060",
+      "floor_plan": "FloorPlan430",
+      "task": "Turn on the faucet and move the candle away from the sink."
+    },
+    {
+      "id": "bathroom_061",
+      "floor_plan": "FloorPlan401",
+      "task": "Switch on the faucet and pick up the towel."
+    },
+    {
+      "id": "bathroom_062",
+      "floor_plan": "FloorPlan402",
+      "task": "Switch on the faucet and pick up the hand towel."
+    },
+    {
+      "id": "bathroom_063",
+      "floor_plan": "FloorPlan403",
+      "task": "Switch on the faucet and pick up the soap bar."
+    },
+    {
+      "id": "bathroom_064",
+      "floor_plan": "FloorPlan404",
+      "task": "Switch on the faucet and pick up the spray bottle."
+    },
+    {
+      "id": "bathroom_065",
+      "floor_plan": "FloorPlan405",
+      "task": "Switch on the faucet and pick up the plunger."
+    },
+    {
+      "id": "bathroom_066",
+      "floor_plan": "FloorPlan406",
+      "task": "Switch on the faucet and pick up the toilet paper."
+    },
+    {
+      "id": "bathroom_067",
+      "floor_plan": "FloorPlan407",
+      "task": "Turn on the faucet and pick up the towel."
+    },
+    {
+      "id": "bathroom_068",
+      "floor_plan": "FloorPlan408",
+      "task": "Turn on the faucet and pick up the hand towel."
+    },
+    {
+      "id": "bathroom_069",
+      "floor_plan": "FloorPlan409",
+      "task": "Turn on the faucet and pick up the soap bar."
+    },
+    {
+      "id": "bathroom_070",
+      "floor_plan": "FloorPlan410",
+      "task": "Turn on the faucet and pick up the spray bottle."
+    },
+    {
+      "id": "bathroom_071",
+      "floor_plan": "FloorPlan411",
+      "task": "Turn on the faucet and pick up the plunger."
+    },
+    {
+      "id": "bathroom_072",
+      "floor_plan": "FloorPlan412",
+      "task": "Turn on the faucet and pick up the toilet paper."
+    },
+    {
+      "id": "bathroom_073",
+      "floor_plan": "FloorPlan413",
+      "task": "Turn on the faucet before picking up the towel."
+    },
+    {
+      "id": "bathroom_074",
+      "floor_plan": "FloorPlan414",
+      "task": "Turn on the faucet before picking up the hand towel."
+    },
+    {
+      "id": "bathroom_075",
+      "floor_plan": "FloorPlan415",
+      "task": "Turn on the faucet before picking up the soap bar."
+    },
+    {
+      "id": "bathroom_076",
+      "floor_plan": "FloorPlan416",
+      "task": "Turn on the faucet before picking up the spray bottle."
+    },
+    {
+      "id": "bathroom_077",
+      "floor_plan": "FloorPlan417",
+      "task": "Turn on the faucet before picking up the plunger."
+    },
+    {
+      "id": "bathroom_078",
+      "floor_plan": "FloorPlan418",
+      "task": "Turn on the faucet before picking up the toilet paper."
+    },
+    {
+      "id": "bathroom_079",
+      "floor_plan": "FloorPlan419",
+      "task": "Wash the towel in the sink."
+    },
+    {
+      "id": "bathroom_080",
+      "floor_plan": "FloorPlan420",
+      "task": "Wash the hand towel in the sink."
+    },
+    {
+      "id": "bathroom_081",
+      "floor_plan": "FloorPlan421",
+      "task": "Wash the soap bar in the sink."
+    },
+    {
+      "id": "bathroom_082",
+      "floor_plan": "FloorPlan422",
+      "task": "Wash the spray bottle in the sink."
+    },
+    {
+      "id": "bathroom_083",
+      "floor_plan": "FloorPlan423",
+      "task": "Wash the plunger in the sink."
+    },
+    {
+      "id": "bathroom_084",
+      "floor_plan": "FloorPlan424",
+      "task": "Wash the towel under the faucet."
+    },
+    {
+      "id": "bathroom_085",
+      "floor_plan": "FloorPlan425",
+      "task": "Wash the hand towel under the faucet."
+    },
+    {
+      "id": "bathroom_086",
+      "floor_plan": "FloorPlan426",
+      "task": "Wash the soap bar under the faucet."
+    },
+    {
+      "id": "bathroom_087",
+      "floor_plan": "FloorPlan427",
+      "task": "Wash the spray bottle under the faucet."
+    },
+    {
+      "id": "bathroom_088",
+      "floor_plan": "FloorPlan428",
+      "task": "Wash the plunger under the faucet."
+    },
+    {
+      "id": "bathroom_089",
+      "floor_plan": "FloorPlan429",
+      "task": "Rinse the towel in the sink."
+    },
+    {
+      "id": "bathroom_090",
+      "floor_plan": "FloorPlan430",
+      "task": "Rinse the hand towel in the sink."
+    },
+    {
+      "id": "bathroom_091",
+      "floor_plan": "FloorPlan401",
+      "task": "Rinse the soap bar in the sink."
+    },
+    {
+      "id": "bathroom_092",
+      "floor_plan": "FloorPlan402",
+      "task": "Rinse the spray bottle in the sink."
+    },
+    {
+      "id": "bathroom_093",
+      "floor_plan": "FloorPlan403",
+      "task": "Rinse the plunger in the sink."
+    },
+    {
+      "id": "bathroom_094",
+      "floor_plan": "FloorPlan404",
+      "task": "Rinse the towel under the faucet."
+    },
+    {
+      "id": "bathroom_095",
+      "floor_plan": "FloorPlan405",
+      "task": "Rinse the hand towel under the faucet."
+    },
+    {
+      "id": "bathroom_096",
+      "floor_plan": "FloorPlan406",
+      "task": "Rinse the soap bar under the faucet."
+    },
+    {
+      "id": "bathroom_097",
+      "floor_plan": "FloorPlan407",
+      "task": "Rinse the spray bottle under the faucet."
+    },
+    {
+      "id": "bathroom_098",
+      "floor_plan": "FloorPlan408",
+      "task": "Rinse the plunger under the faucet."
+    },
+    {
+      "id": "bathroom_099",
+      "floor_plan": "FloorPlan409",
+      "task": "Pick up the towel and put it aside."
+    },
+    {
+      "id": "bathroom_100",
+      "floor_plan": "FloorPlan410",
+      "task": "Pick up the hand towel and put it aside."
+    }
+  ]
+}

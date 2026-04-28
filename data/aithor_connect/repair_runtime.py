@@ -1,10 +1,10 @@
-"""Runtime helpers for integrating standalone RAG repair into execution.
+"""Runtime helpers for integrating STL-guided constrained replanning.
 
 This module does not execute AI2-THOR actions directly. It provides a thin
-runtime around ``repair/rag_consens.py`` so the main runtime can:
+runtime around the replanning stack so the main runtime can:
 - keep a history of completed planner-visible actions
-- ask RAG for a repair sequence when prediction blocks an action
-- log each repair request for later inspection
+- ask the constrained replanner for a repair sequence when prediction blocks an action
+- log each replan request for later inspection
 """
 
 from __future__ import annotations
@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from repair.rag_consens import RAGRepairModule, SafeExecutionDatabase
+from data.aithor_connect.replan_runtime import request_replan as request_replan_pipeline
 
 
 def init_repair_runtime(
@@ -22,14 +22,11 @@ def init_repair_runtime(
     task_description: str,
     max_depth: int = 1,
 ) -> Dict[str, object]:
-    """Initialize standalone RAG repair for one task execution."""
+    """Initialize constrained replanning for one task execution."""
     trace_path = Path(task_dir) / "repair_trace.jsonl"
     trace_path.write_text("", encoding="utf-8")
-    database = SafeExecutionDatabase()
-    module = RAGRepairModule(database=database, top_k=3, history_window=6, future_window=4)
     return {
-        "enabled": len(database) > 0,
-        "module": module,
+        "enabled": True,
         "environment": environment,
         "task_description": task_description,
         "executed_actions": [],
@@ -94,33 +91,47 @@ def end_repair(repair_state: Optional[Dict[str, object]]) -> None:
 
 def request_repair(
     repair_state: Optional[Dict[str, object]],
+    pre_state: Dict[str, object],
     action_info: Dict[str, str],
     prediction_result: Dict[str, object],
 ) -> Optional[Dict[str, object]]:
-    """Run RAG repair for one blocked action and log the result."""
+    """Run STL-guided constrained replanning for one blocked action and log the result."""
     if not repair_allowed(repair_state):
         return None
 
     blocked_action = build_repair_action(action_info)
-    result = repair_state["module"].repair_action(
+    result = request_replan_pipeline(
+        pre_state=pre_state,
         blocked_action=blocked_action,
         executed_actions=list(repair_state["executed_actions"]),
+        remaining_goal=str(repair_state["task_description"]),
         environment=str(repair_state["environment"]),
         task_description=str(repair_state["task_description"]),
     )
-    if result is None:
+    if not result:
         return None
 
+    replan_result = result.get("replan_result", {})
+    retry_required = bool(replan_result.get("retry_required", False))
     _append_trace(
         repair_state["trace_path"],
         {
             "blocked_action": blocked_action,
             "prediction_result": prediction_result,
-            "retrieved_records": result.get("retrieved_records", []),
-            "repair_actions": result.get("repair_actions", []),
+            "risk_state": result.get("risk_state", {}),
+            "action_group": result.get("action_group", {}),
+            "replan_result": replan_result,
+            "retry_required": retry_required,
+            "repair_actions": replan_result.get("repair_actions", []),
         },
     )
-    return result
+    return {
+        "repair_actions": replan_result.get("repair_actions", []),
+        "retry_required": retry_required,
+        "risk_state": result.get("risk_state", {}),
+        "action_group": result.get("action_group", {}),
+        "replan_result": replan_result,
+    }
 
 
 def set_pending_skip_actions(

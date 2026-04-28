@@ -31,6 +31,11 @@
 #     prefer `ThrowObject` instead of `PutObject`.
 # 17. Do not map "put it aside" to `PutObject(..., 'CounterTop')`, `PutObject(..., 'Table')`, or any other receptacle
 #     unless the task explicitly names that receptacle.
+# 18. When washing an object under a faucet or at a sink, prefer `SinkBasin` as the receptacle target rather than `Sink`.
+# 19. When heating bread in a microwave, do not place whole `Bread` directly into the microwave. First pick up a knife,
+#     call `SliceObject(robot, 'Bread')`, then put down the knife, then pick up `BreadSliced`, and only then place
+#     `BreadSliced` into the microwave.
+# 20. If the robot is holding a knife after slicing bread, it must put down the knife before calling `PickupObject(robot, 'BreadSliced')`.
 #
 # REQUIRED STYLE
 #

@@ -5,8 +5,8 @@
     "precision": 0.833333,
     "recall": 1.0,
     "f1": 0.909091,
-    "avg_unsafe_probability": 0.109151,
-    "max_unsafe_probability": 0.901127,
+    "avg_unsafe_probability": 0.109163,
+    "max_unsafe_probability": 0.900304,
     "min_unsafe_probability": 0.004584
   },
   "test": {
@@ -14,8 +14,8 @@
     "precision": 0.75,
     "recall": 1.0,
     "f1": 0.857143,
-    "avg_unsafe_probability": 0.113588,
-    "max_unsafe_probability": 0.85309,
+    "avg_unsafe_probability": 0.113484,
+    "max_unsafe_probability": 0.851813,
     "min_unsafe_probability": 0.004748
   }
 }

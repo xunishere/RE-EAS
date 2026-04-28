@@ -1,0 +1,34 @@
+{
+  "validation": {
+    "split": "validation",
+    "accuracy": 0.992308,
+    "precision": 0.833333,
+    "recall": 1.0,
+    "f1": 0.909091,
+    "avg_unsafe_probability": 0.044325,
+    "max_unsafe_probability": 1.0,
+    "min_unsafe_probability": 0.0,
+    "conformal": {
+      "alpha": 0.1,
+      "quantile": 0.0,
+      "avg_interval_width": 1.0,
+      "avg_confidence": 0.998171
+    }
+  },
+  "test": {
+    "split": "test",
+    "accuracy": 0.986047,
+    "precision": 0.75,
+    "recall": 1.0,
+    "f1": 0.857143,
+    "avg_unsafe_probability": 0.055558,
+    "max_unsafe_probability": 1.0,
+    "min_unsafe_probability": 0.0,
+    "conformal": {
+      "alpha": 0.1,
+      "quantile": 0.0,
+      "avg_interval_width": 1.0,
+      "avg_confidence": 0.999744
+    }
+  }
+}

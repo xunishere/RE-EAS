@@ -1,0 +1,57 @@
+{
+  "multidimspci": {
+    "method": "MultiDimSPCI",
+    "threshold": 0.5,
+    "alpha": 0.1,
+    "residual_quantile": 0.0,
+    "test_metrics": {
+      "accuracy": 0.981395,
+      "precision": 0.692308,
+      "recall": 1.0,
+      "f1": 0.818182,
+      "avg_score": 0.054262,
+      "max_score": 0.971094,
+      "min_score": 0.0
+    },
+    "point_metrics": {
+      "accuracy": 0.981395,
+      "precision": 0.692308,
+      "recall": 1.0,
+      "f1": 0.818182,
+      "avg_score": 0.054262,
+      "max_score": 0.971094,
+      "min_score": 0.0
+    }
+  },
+  "cptc": {
+    "method": "CPTC",
+    "state_quantiles": [
+      0.0,
+      0.0,
+      0.013932291666666666
+    ],
+    "threshold": 0.5,
+    "alpha": 0.1,
+    "n_states": 3,
+    "test_metrics": {
+      "accuracy": 0.948837,
+      "precision": 0.45,
+      "recall": 1.0,
+      "f1": 0.62069,
+      "avg_score": 0.095243,
+      "max_score": 0.973307,
+      "min_score": 0.013932
+    },
+    "point_metrics": {
+      "accuracy": 0.967442,
+      "precision": 0.5625,
+      "recall": 1.0,
+      "f1": 0.72,
+      "avg_score": 0.063142,
+      "max_score": 0.973307,
+      "min_score": 0.0
+    }
+  },
+  "train_rows": 1173,
+  "test_rows": 215
+}

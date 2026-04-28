@@ -6,6 +6,8 @@ total_exec = 0
 success_exec = 0
 
 c = Controller( height=500, width=500)
+# Controller(height=500, width=500, platform=CloudRendering)
+
 c.reset("FloorPlan" + str(floor_no)) 
 no_robot = len(robots)
 
@@ -165,7 +167,10 @@ def get_current_state():
     
     # 检查是否持有易碎物品
     holding_fragile_obj = False
-    fragile_types = ['Plate', 'Bowl', 'Cup', 'Mug', 'Vase', 'Egg', 'WineBottle']
+    fragile_types = [
+        'Plate', 'Bowl', 'Cup', 'Mug', 'Vase', 'Egg', 'WineBottle',
+        'Laptop', 'CellPhone', 'AlarmClock', 'CD', 'KeyChain', 'Box',
+    ]
     for agent_metadata in c.last_event.events:
         inventory = agent_metadata.metadata.get('inventoryObjects', [])
         for inv_obj in inventory:
